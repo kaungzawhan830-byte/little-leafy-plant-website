@@ -152,6 +152,14 @@
 }
 
     </style>
+<style id="phone-fix">
+@media (max-width:767px){
+  html,body{overflow-x:hidden}
+  #mobile-menu-btn{position:fixed;top:14px;right:14px;z-index:70;background:#fff;padding:8px;border-radius:8px}
+  #mobile-menu{position:fixed;top:72px;left:0;right:0;z-index:60;max-height:calc(100vh - 72px);overflow-y:auto;box-shadow:0 8px 16px rgba(0,0,0,.12)}
+  header .flex.space-x-1{display:none}
+}
+</style>
 </head>
 <body class="scroll-smooth">
 
@@ -251,6 +259,10 @@
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="#home" class="block px-3 py-2 text-gray-700">Home</a>
+                <a href="Shop.html" class="block px-3 py-2 text-gray-700">Shop</a>
+                <a href="About.html" class="block px-3 py-2 text-gray-700">About</a>
+                <a href="Login.html" class="block px-3 py-2 text-gray-700">Login</a>
+                <a href="Help.html" class="block px-3 py-2 text-gray-700">Help</a>
                 <a href="#products" class="block px-3 py-2 text-gray-700">Products</a>
                 <a href="#plant-care" class="block px-3 py-2 text-gray-700">Plant Care</a>
                 <a href="#guides" class="block px-3 py-2 text-gray-700">Plant Guides</a>
