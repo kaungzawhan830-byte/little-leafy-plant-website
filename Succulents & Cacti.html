@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Leafy.com</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .floating { animation: float 4s ease-in-out infinite; }
+    .floating-2 { animation: float 5s ease-in-out infinite 1s; }
+    .floating-3 { animation: float 6s ease-in-out infinite 1.5s; }
+
+    @keyframes slide-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-83.33%); } /* 6 slides */
+    }
+    .animate-slide-left {
+      animation: slide-left 40s linear infinite;
+    }
+
+    .search-dropdown {
+      display: none;
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+    .search-input:focus + .search-dropdown, .search-dropdown:hover {
+      display: block;
+    }
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Custom CSS */
+    /* Slider Animation */
+    .slider-track {
+        animation: slide 60s linear infinite;
+        will-change: transform;
+    }
+    
+    @keyframes slide {
+        0%, 15% { transform: translateX(0); }
+        20%, 35% { transform: translateX(-16.6666%); }
+        40%, 55% { transform: translateX(-33.3333%); }
+        60%, 75% { transform: translateX(-50%); }
+        80%, 95% { transform: translateX(-66.6666%); }
+        100% { transform: translateX(-83.3333%); }
+    }
+    
+    /* Search Dropdown */
+    .search-input:focus + .search-dropdown,
+    .search-dropdown:hover {
+        display: block !important;
+    }
+    
+    /* Mobile Menu Animation */
+    .mobile-menu {
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
+    }
+    
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+    
+    @keyframes slide-left-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-50%); } /* move left */
+      100% { transform: translateX(0); }   /* move back right */
+    }
+
+    .slider-track {
+      animation: slide-left-right 40s linear infinite;
+    }
+
+    /* Slider Animation */
+     /* Slider Animation for 6 Images (go 1→6 then 6→1) */
+@keyframes slide-pingpong {
+  0%   { transform: translateX(0); }          /* Show 1 */
+  10%  { transform: translateX(-16.6666%); }  /* Show 2 */
+  20%  { transform: translateX(-33.3333%); }  /* Show 3 */
+  30%  { transform: translateX(-50%); }       /* Show 4 */
+  40%  { transform: translateX(-66.6666%); }  /* Show 5 */
+  50%  { transform: translateX(-83.3333%); }  /* Show 6 */
+  60%  { transform: translateX(-66.6666%); }  /* Back to 5 */
+  70%  { transform: translateX(-50%); }       /* Back to 4 */
+  80%  { transform: translateX(-33.3333%); }  /* Back to 3 */
+  90%  { transform: translateX(-16.6666%); }  /* Back to 2 */
+  100% { transform: translateX(0); }          /* Back to 1 */
+}
+
+.slider-track {
+  display: flex;
+  width: 600%; /* since you have 6 images */
+  animation: slide-pingpong 60s linear infinite;
+  will-change: transform;
+}
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Leafy - Succulents</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      padding-top: 80px; /* Compensate for fixed header */
+    }
+    .search-container {
+      position: relative;
+    }
+    .search-input:focus + .search-dropdown,
+    .search-dropdown:hover {
+      display: block;
+    }
+    .group:hover .group-hover\:visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .logo-container {
+    display: flex;
+    align-items: center; /* vertically centers text and SVG */
+    gap: 0.5rem;         /* space between logo and text */
+}
+
+.logo-container > svg {
+    width: 64px;
+    height: 64px;
+}
+
+.logo-container > .logo-text {
+    font-size: 2rem;
+    line-height: 1; /* remove extra vertical spacing */
+}
+
+/* Footer Brand Styling */
+.footer-brand .brand-logo {
+  width: 48px;         /* Logo width */
+  height: 48px;        /* Logo height */
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  fill: #22c55e;       /* Green color (#22c55e = Tailwind green-500) */
+}
+
+.footer-brand .brand-title {
+  display: flex;
+  align-items: center;  /* Vertical align text with logo */
+  font-size: 1.25rem;   /* text-xl equivalent */
+  font-weight: 700;
+  margin-bottom: 1rem;  /* mb-4 */
+}
+
+
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Fixed Header -->
+  <header class="bg-white shadow-sm py-4 px-6 fixed-top fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+     <!-- Logo -->
+<div class="logo-container">
+    <svg class="text-green-600" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+        <path d="M12 12V22"/>
+    </svg>
+    <span class="logo-text text-green-700 font-bold">Little Leafy</span>
+</div>
+
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-8 items-center">
+        <a href="Home.html" class="text-gray-600 hover:text-green-700 font-medium">🏡 Home</a>
+
+
+<!-- Dropdown Menu -->
+<div class="relative group">
+ <a href="Shop.html" class="flex items-center space-x-1 text-gray-600 hover:text-green-700 font-medium px-3 py-2 transition-colors">
+    <span>🛒 Shop</span>
+    <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+  
+  <!-- Dropdown -->
+  <div class="absolute left-0 mt-1 w-56 bg-white rounded-lg shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100 pointer-events-none group-hover:pointer-events-auto">
+    <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌳 Indoor Plants</a>
+    <a href="OutDoor  Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌲 Outdoor Plants</a>
+    <a href="Succulents & Cacti.html" class="block px-4 py-2 text-green-700 font-medium hover:bg-green-50 transition-colors">🌵 Succulents & Cacti</a>
+     <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+    <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">👀 View All Plants</a>
+  </div>
+</div>
+
+
+
+
+        
+               <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+                <a href="Login.html" class="text-gray-700 hover:text-green-600 font-medium px-3 py-2">🔐 Login</a>
+          <a href="Help.html" class="text-gray-700 hover:text-green-600 font-medium px-3 py-2">🆘Help</a>
+
+        <!-- Dropdown Menu -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 text-gray-600 hover:text-green-700 font-medium px-3 py-2 transition-colors">
+            <span>📂 Contents</span>
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          
+          <!-- Dropdown -->
+          <div class="absolute left-0 mt-1 w-48 bg-white rounded-lg shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100 pointer-events-none group-hover:pointer-events-auto">
+            <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">📖 Plant Care Guides</a>
+            <a href="blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">📰 Blog</a>
+            <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">❓ Our Policies & FAQs</a>
+            <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+          </div>
+        </div>
+
+        <!-- Search & Cart -->
+        <div class="flex items-center space-x-4">
+          <div class="relative search-container">
+            <input type="text" placeholder="Search succulents..." class="search-input px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500">
+            <div class="search-dropdown bg-white border border-gray-200 rounded-lg mt-1 shadow-lg hidden absolute w-full">
+              <div class="p-2 hover:bg-gray-100 cursor-pointer">🌿 Echeveria</div>
+<div class="p-2 hover:bg-gray-100 cursor-pointer">🌵 Golden Barrel</div>
+<div class="p-2 hover:bg-gray-100 cursor-pointer">🍃 String of Pearls</div>
+<div class="p-2 hover:bg-gray-100 cursor-pointer">🌱 Aloe Vera</div>
+<div class="p-2 hover:bg-gray-100 cursor-pointer">🍀 Haworthia</div>
+
+            </div>
+          </div>
+          <a href="Plant detail.html" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full transition">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  
+</body>
+</html>
+
+  <!-- Hero Section with Slider -->
+  <section class="relative overflow-hidden" style="height: 80vh; min-height: 560px; max-height: 900px;">
+    <div class="absolute inset-0 w-full h-full overflow-hidden">
+      <div class="slider-track flex w-[200%] h-full animate-slide-left">
+        <img src="https://sandiegomagazine.com/wp-content/uploads/2023/10/Pigment.jpg" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="Succulent garden">
+        <img src="https://ca-times.brightspotcdn.com/dims4/default/873fce7/2147483647/strip/true/crop/3654x2436+0+0/resize/1200x800!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F83%2F40%2F353f4c85492e985a485ed52ef2f0%2F1318578-wk-plant-ppl-prop-house-015.jpg" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="Succulent arrangement">
+        <img src="https://succulentmarket.com/cdn/shop/files/5_2160x.png?v=1715019380" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="Cactus garden">
+        <img src="https://cactusenligne.ca/cdn/shop/collections/Banner_Succulent_1350x760.jpg?v=1720459951" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="Succulent display">
+        <img src="https://m.media-amazon.com/images/I/81rT5bs+a+L._UF894,1000_QL80_.jpg" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="Colorful succulents">
+        <img src="https://i.etsystatic.com/24041076/r/il/9626d2/6078091207/il_570xN.6078091207_ige5.jpg" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="Succulent collection">
+      </div>
+      <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        Discover Beautiful Succulents
+      </h1>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl">
+        Explore our collection of easy-care succulents perfect for any space.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#shop-succulents" 
+           class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg text-center">
+          🌵 Shop Succulents
+        </a>
+        <a href="All Plant Guide.html" class="bg-white hover:bg-gray-50 text-green-700 px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg">
+          📘 Care Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Succulents Section -->
+  <section id="shop-succulents" class="container mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Succulents & Cactis</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      
+      <!-- Product 1 (Discount -15%) -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-15%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="Succulents & Cacti.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/306ebdb4-75af-4cf3-8b8c-6d46862c56c6.png" alt="Echeveria succulent rosettes" class="floating object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Echeveria</h4>
+      <p class="text-gray-600 text-sm mb-2">Perfect Rosettes</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$17.64</span></div>
+      <div class="font-bold text-green-700 mb-2">$14.99</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 2 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="Succulents & Cacti.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/68633501-954b-4e33-af13-cc86832fc0a7.png" alt="Golden Barrel Cactus" class="floating-2 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Golden Barrel</h4>
+    <p class="text-gray-600 text-sm mb-2">Sun-loving Cactus</p>
+    <div class="font-bold text-green-700 mb-2">$19.50</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 3 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="Succulents & Cacti.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1059256-c571-415c-b687-f43b229b476a.png" alt="String of Pearls succulent" class="floating-3 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">String of Pearls</h4>
+    <p class="text-gray-600 text-sm mb-2">Trailing Beauty</p>
+    <div class="font-bold text-green-700 mb-2">$17.99</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 4 (Discount -10%) -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-10%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="Succulents & Cacti.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c94162f-fedb-4dae-9f2b-63abcccf683d.png" alt="Aloe Vera" class="floating object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Aloe Vera</h4>
+      <p class="text-gray-600 text-sm mb-2">Healing Properties</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$23.37</span></div>
+      <div class="font-bold text-green-700 mb-2">$21.50</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 5 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="Succulents & Cacti.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6d99fe59-a33b-4d26-b383-9af5fdbbd144.png" alt="Haworthia" class="floating-2 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Haworthia</h4>
+    <p class="text-gray-600 text-sm mb-2">Zebra Plant</p>
+    <div class="font-bold text-green-700 mb-2">$16.99</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 6 (Discount -17%) -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-17%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="Succulents & Cacti.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/710228da-e3f7-4c76-9037-6d6495ad1147.png" alt="Jade Plant" class="floating-3 object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Jade Plant</h4>
+      <p class="text-gray-600 text-sm mb-2">Money Plant</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$28.31</span></div>
+      <div class="font-bold text-green-700 mb-2">$23.50</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 7 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="Succulents & Cacti.html">
+      <img src="https://www.wekivafoliage.com/cdn/shop/products/medium_1026c69d-4fc5-4864-aa6b-1e0562b5835f.jpg?v=1753740707" alt="Burro's Tail" class="floating object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Burro's Tail</h4>
+    <p class="text-gray-600 text-sm mb-2">Trailing Succulent</p>
+    <div class="font-bold text-green-700 mb-2">$19.99</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 8 (Discount -13%) -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-13%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="Succulents & Cacti.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90468f04-9347-4e06-9900-2719e31d5d04.png" alt="Prickly Pear" class="floating-2 object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Prickly Pear</h4>
+      <p class="text-gray-600 text-sm mb-2">Edible Fruit</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$31.64</span></div>
+      <div class="font-bold text-green-700 mb-2">$27.50</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 9 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="Succulents & Cacti.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0412c270-f993-4719-90a4-68ee91ea9c88.png" alt="Agave" class="floating-3 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Agave</h4>
+    <p class="text-gray-600 text-sm mb-2">Desert Beauty</p>
+    <div class="font-bold text-green-700 mb-2">$32.99</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 10 (Discount -20%) -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-20%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="Succulents & Cacti.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/549510af-910d-4878-9d57-5f3be48802eb.png" alt="Blue Chalk Sticks" class="floating object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Blue Chalk Sticks</h4>
+      <p class="text-gray-600 text-sm mb-2">Unique Color</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$23.44</span></div>
+      <div class="font-bold text-green-700 mb-2">$18.75</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="footer-brand">
+        <h3 class="brand-title">
+          <svg class="brand-logo" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+            <path d="M12 12V22"/>
+          </svg>
+          Little Leafy
+        </h3>
+        <p class="text-gray-400">
+          Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+        </p>
+      </div>
+
+
+      <div>
+        <h4 class="font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+           <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+          <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+          <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+          <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+          <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+          <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+        </ul>
+      </div>
+
+     <div>
+        <h4 class="font-bold mb-4">Customer Service</h4>
+        <ul class="space-y-2">
+          <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+          <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-green-600 transition">Our Policies & FAQs</a></li>
+          <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+        </ul>
+
+
+        <h4 class="font-bold mb-4">Categories</h4>
+        <ul class="space-y-2">
+           <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+          <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+          <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+          <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+              <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+        <div class="space-y-2 text-gray-400">
+          <p>45 Thiri Mingalar Street</p>
+          <p>Bahan Township, Yangon 11201</p>
+          <p>Phone: (095) 123-4567</p>
+          <p>Email: kaungzawhan830@gmail.com</p>
+        </div>
+
+          <!-- Newsletter Section -->
+        <div class="mt-6">
+          <h4 class="font-medium mb-2">Subscribe Our Page....</h4>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="px-3 py-2 text-gray-800 rounded-l-lg w-full focus:outline-none">
+            <button class="bg-green-800 hover:bg-green-700 px-4 py-2 rounded-r-lg">
+              <i class="">Subscribe</i>
+            </button>
+          </div>
+        </div>
+
+        <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+        <div class="flex space-x-4 mb-4">
+           <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+      <p>© 2023 Little Leafy. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

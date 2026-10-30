@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#166534', // green-700
+                        secondary: '#22c55e', // green-600
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scroll': 'scroll 30s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(calc(-250px * 6))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leaf-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .store-image {
+            transition: all 0.5s ease;
+        }
+        
+        .store-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .scrolling-images {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(90deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+        
+        .scrolling-track {
+            animation: scroll 30s linear infinite;
+            display: flex;
+            width: calc(250px * 12);
+        }
+        
+        .scrolling-image {
+            height: 150px;
+            width: 220px;
+            margin: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member {
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .team-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(34, 197, 94, 0.85);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            transition: .5s ease;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        
+        .team-card:hover .team-overlay {
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        
+        .overlay-text {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+<!-- CSS -->
+<style>
+.logo-container {
+    align-items: center;
+}
+.logo-icon {
+    width: 60px;  /* Bigger star */
+    height: 60px;
+    color: #16a34a; /* Tailwind green-600 */
+}
+.logo-title {
+    font-size: 2rem;   /* Bigger text */
+    font-weight: 800;  /* Extra bold */
+    color: #16a34a;
+}
+.logo-img {
+    width: 50px;   /* Bigger circle images */
+    height: 50px;
+    border-radius: 50%;
+    object-cover: cover;
+}
+    </style>
+</head>
+<body class="scroll-smooth bg-green-50 pt-20">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <!-- Fixed Top Navbar -->
+        <header class="fixed top-0 left-0 w-full bg-white shadow z-50">
+            <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+                
+              <!-- Logo -->
+<div class="logo-container flex items-center space-x-4">
+    <div class="logo-text flex items-center space-x-2">
+        <svg class="logo-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+            <path d="M12 12V22"/>
+        </svg>
+        <span class="logo-title">Little Leafy</span>
+    </div>
+    <div class="flex space-x-2">
+        <img src="https://assets.digitalcontent.marksandspencer.app/image/upload/w_2560,q_auto,f_auto/SD_FD_F44A_29350063_NC_X_EC_0" alt="Small green succulent plant" class="logo-img" />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpuhIEchEK-dJcK__fDTwvCZzwIdNq51SyzA&s" alt="Monstera leaf" class="logo-img" />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFjrgKturj4MKMmaY7lQJBDT_0bT30nNhlQ&s" alt="Indoor plants" class="logo-img" />
+    </div>
+</div>
+
+
+
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="Home.html" class=" hover:text-green-600 transition-colors">🌱 Home</a>
+
+                    <!-- Shop Dropdown -->
+                    <div class="relative group">
+                        <a href="Shop.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+                            <span>🛒 Shop</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+                            <a href="OutDoor  Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+                            <a href="Succulents & Cacti.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌵 Succulents and Cactis</a>
+                            <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+                            <a href="Shop.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱🪴View all Plants</a>
+                        </div>
+                    </div>
+
+                    <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+                    <a href="Login.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors"> 🔐 Login</a>
+                    <a href="Help.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🆘 Help</a>
+
+                    <!-- Contents Dropdown -->
+                    <div class="relative group">
+                        <a href="#" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+                            <span>📂 Contents</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📖 Plant Care Trip & Guides</a>
+                            <a href="Blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📰 Blog</a>
+                            <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">❓ Our Policies & FAQs</a>
+                            <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌎 Visit Us</a>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+    </nav>
+
+    <div class="scrolling-images mt-16" style="overflow:hidden; white-space: nowrap;">
+    <div class="scrolling-track flex" id="scrollingTrack">
+        <!-- Your images go here (same as the HTML you provided) -->
+        <div class="scrolling-image">
+            <img src="https://hips.hearstapps.com/hmg-prod/images/a-set-of-colorful-potted-plants-on-a-patterned-area-royalty-free-image-1715704221.jpg">
+        </div>
+        <div class="scrolling-image">
+                <img src="https://www.rhs.org.uk/getmedia/66015948-e744-4800-8fb5-fc407af40a65/dracaena-nephrolepis-sansevieria.jpg" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://thursd.com/storage/media/37783/Air-purifying-houseplants---on-Thursd.jpg" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://www.cambridgebee.com/cdn/shop/articles/473DA96E-6FB7-4643-BE54-36753F79B647_600x.jpg?v=1684251722" alt="Store exterior" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/newscms/2019_19/1436052/indoor-plant-today-main-190510-02.jpg" alt="Plant care" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://images.squarespace-cdn.com/content/v1/54fbb611e4b0d7c1e151d22a/1628215026545-0HWOXK4FFLALSJ48K16I/patio-surrounded-by-flowers-and-potted-plants.jpg" alt="Plant selection" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://img-us.aosomcdn.com/thumbnail/100/n0/product/2025/06/27/GR9ff3197b17b5c22.jpg" alt="Green plants" class="w-full h-full object-cover">
+            </div>
+            <!-- Duplicate set for seamless looping -->
+            <div class="scrolling-image">
+                <img src="https://www.provenwinners.com/sites/provenwinners.com/files/2019/articles/radiance_combo_2_0.jpg" alt="Store interior" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/222/724/small/ai-generated-closeup-house-plant-in-pot-on-white-windowsill-with-blurred-window-on-background-photo.jpg" alt="Plant nursery" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://png.pngtree.com/background/20250215/original/pngtree-indoor-plants-in-a-window-sill-picture-image_12949276.jpg">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://www.familyhandyman.com/wp-content/uploads/2021/04/landscaping-with-cannas-GettyImages-518137174.jpg" alt="Plant care" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://i.redd.it/low-maintenance-attractive-foliage-for-north-texas-that-get-v0-r3g7p6l6fb7e1.jpg?width=3000&format=pjpg&auto=webp&s=6bcfc82152f2a3255a20e9f014078dc14b976b02" alt="Plant selection" class="w-full h-full object-cover">
+            </div>
+            <div class="scrolling-image">
+                <img src="https://plantsandplants.store/cdn/shop/collections/Outdoor_Plant_Display_Main_pic_1200x1200.png?v=1752488879">
+            </div>
+        <div class="scrolling-image">
+            <img src="https://i0.wp.com/wolffsapplehouse.com/wp-content/uploads/2021/06/3935FC79-3A87-4F8E-A443-505023DB5589.jpeg?fit=900%2C725&ssl=1&w=640">
+        </div>
+        
+    </div>
+</div>
+
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Page Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">Visit Our Plant Store</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Experience the beauty of nature at our physical store. We'd love to welcome you to our green oasis in the heart of Yangon.</p>
+        </div>
+
+        <!-- Map Section -->
+        <section class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-primary mb-6">Find Us Here</h2>
+                    <p class="text-gray-600 mb-6">Our store is conveniently located in the Bahan Township, with plenty of parking available. Look for our green storefront filled with beautiful plants!</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-green-700 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Address</h3>
+                                <p class="text-gray-600">45 Thiri Mingalar Street, Bahan Township, Yangon 11201</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-green-700 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Opening Hours</h3>
+                                <p class="text-gray-600">Monday-Friday: 9am - 6pm</p>
+                                <p class="text-gray-600">Saturday-Sunday: 10am - 4pm</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-green-700 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Contact</h3>
+                                <p class="text-gray-600">Phone: (095) 123-4567</p>
+                                <p class="text-gray-600">Email: kaungzawhan830@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.google.com/maps/dir//45+Thiri+Mingalar+Street+Bahan+Township+Yangon+11201" 
+                       target="_blank" 
+                       class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition-colors">
+                        <i class="fas fa-directions mr-2"></i> Get Directions
+                    </a>
+                </div>
+                
+                <div class="map-container relative">
+                    <!-- Animated leaves decoration -->
+                    <div class="absolute -top-6 -left-6 z-10 leaf-animation">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4158/4158476.png" alt="Leaf" class="w-16 h-16 opacity-80">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 z-10 leaf-animation" style="animation-delay: 2s;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4158/4158476.png" alt="Leaf" class="w-16 h-16 opacity-80">
+                    </div>
+                    
+                    <!-- Google Map iframe -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3819.489036586163!2d96.15672231434548!3d16.80635998843062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eb3d5f2c2b0b%3A0x6a7b6e5b3e3b3b3b!2sBahan%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1642345678901!5m2!1sen!2smm" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Images Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-primary mb-2 text-center">Our Store</h2>
+            <p class="text-gray-600 text-center mb-12">Take a peek inside our plant paradise</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <a href="Shop.html" class="relative overflow-hidden rounded-2xl store-image group block">
+        <img src="https://www.bobvila.com/wp-content/uploads/2022/07/flower-garden-GettyImages-2157121850.jpg" 
+             alt="Store interior" 
+             class="w-full h-64 object-cover transition-transform duration-700">
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            <span class="text-white text-lg font-semibold">Plant Selection</span>
+        </div>
+    </a>
+
+                <a href="Plant tools.html" class="relative overflow-hidden rounded-2xl store-image group block">
+    <img src="https://vivosun.com/wp-content/uploads/2023/04/macro-and-micro-nutrients-1030x772-1.jpg" 
+         alt="Plant nursery" 
+         class="w-full h-64 object-cover transition-transform duration-700">
+    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+        <span class="text-white text-lg font-semibold">Plant Nursery</span>
+    </div>
+</a>
+
+                
+                <a href="Visit Us.html" class="relative overflow-hidden rounded-2xl store-image group block">
+    <img src="https://t3.ftcdn.net/jpg/11/72/78/24/360_F_1172782480_HZr8Y1eyC1yeYL2hRxPsTlyiB3Gf7JFM.jpg" 
+         alt="Store exterior" 
+         class="w-full h-64 object-cover transition-transform duration-700">
+    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+        <span class="text-white text-lg font-semibold">Store Entrance</span>
+    </div>
+</a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-16">
+            <h2 class="text-3xl font-bold text-primary mb-2 text-center">Our In-Store Services</h2>
+            <p class="text-gray-600 text-center mb-12">We offer more than just plants</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-xl bg-green-50 hover:bg-green-100 transition-colors">
+                    <div class="bg-green-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-seedling text-green-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-xl mb-2">Plant Consultation</h3>
+                    <p class="text-gray-600">Get expert advice on choosing the right plants for your space</p>
+                </div>
+                
+                <div class="text-center p-6 rounded-xl bg-green-50 hover:bg-green-100 transition-colors">
+                    <div class="bg-green-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-spa text-green-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-xl mb-2">Repotting Service</h3>
+                    <p class="text-gray-600">We'll help repot your new plants with the right soil and containers</p>
+                </div>
+                
+                <div class="text-center p-6 rounded-xl bg-green-50 hover:bg-green-100 transition-colors">
+                    <div class="bg-green-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-truck-loading text-green-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-xl mb-2">Local Delivery</h3>
+                    <p class="text-gray-600">We offer safe delivery for larger plants within the Yangon area</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet Our Team Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-primary mb-2 text-center">Meet Our Team</h2>
+            <p class="text-gray-600 text-center mb-12">Our passionate plant experts are here to help you</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="team-card bg-white rounded-xl overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Plant Specialist" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Emma Johnson</h3>
+                        <p class="text-green-600 font-medium mb-3">Head Plant Specialist</p>
+                        <p class="text-gray-600 text-sm">10+ years of experience in horticulture and plant care</p>
+                    </div>
+                    <div class="team-overlay">
+                        <div class="overlay-text">
+                            <p class="text-sm mb-2">Specializes in tropical plants and sustainable gardening practices</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="https://www.facebook.com/YourPageName" class="text-white hover:text-green-200"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.instagram.com/YourProfileName" class="text-white hover:text-green-200"><i class="fab fa-instagram"></i></a>
+<a href="https://www.linkedin.com/in/YourProfileOrCompanyName" class="text-white hover:text-green-200"><i class="fab fa-linkedin-in"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-card bg-white rounded-xl overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://ysm-res.cloudinary.com/image/upload/ar_1:1,c_fill,dpr_3.0,f_auto,g_faces:auto,q_auto:eco,w_500/v1/yms/prod/332e5c7d-9008-4f8e-bf5d-65898c39b60f" 
+                             alt="Nursery Manager" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Michael Chen</h3>
+                        <p class="text-green-600 font-medium mb-3">Nursery Manager</p>
+                        <p class="text-gray-600 text-sm">Expert in plant propagation and greenhouse management</p>
+                    </div>
+                    <div class="team-overlay">
+                        <div class="overlay-text">
+                            <p class="text-sm mb-2">Manages our plant nursery and oversees quality control</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="https://www.facebook.com/YourPageName" class="text-white hover:text-green-200"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.instagram.com/YourProfileName" class="text-white hover:text-green-200"><i class="fab fa-instagram"></i></a>
+<a href="https://www.linkedin.com/in/YourProfileOrCompanyName" class="text-white hover:text-green-200"><i class="fab fa-linkedin-in"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-card bg-white rounded-xl overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Customer Specialist" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Sophia Williams</h3>
+                        <p class="text-green-600 font-medium mb-3">Customer Specialist</p>
+                        <p class="text-gray-600 text-sm">Helps customers find the perfect plants for their needs</p>
+                    </div>
+                    <div class="team-overlay">
+                        <div class="overlay-text">
+                            <p class="text-sm mb-2">Known for her exceptional knowledge of indoor plant varieties</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="https://www.facebook.com/YourPageName" class="text-white hover:text-green-200"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.instagram.com/YourProfileName" class="text-white hover:text-green-200"><i class="fab fa-instagram"></i></a>
+<a href="https://www.linkedin.com/in/YourProfileOrCompanyName" class="text-white hover:text-green-200"><i class="fab fa-linkedin-in"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-card bg-white rounded-xl overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             alt="Landscape Designer" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">David Kim</h3>
+                        <p class="text-green-600 font-medium mb-3">Landscape Designer</p>
+                        <p class="text-gray-600 text-sm">Creates beautiful plant arrangements for homes and offices</p>
+                    </div>
+                    <div class="team-overlay">
+                        <div class="overlay-text">
+                            <p class="text-sm mb-2">Specializes in creating sustainable and beautiful plant displays</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="https://www.facebook.com/YourPageName" class="text-white hover:text-green-200"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.instagram.com/YourProfileName" class="text-white hover:text-green-200"><i class="fab fa-instagram"></i></a>
+<a href="https://www.linkedin.com/in/YourProfileOrCompanyName" class="text-white hover:text-green-200"><i class="fab fa-linkedin-in"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1f2937] text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <h3 class="brand-title flex items-center text-xl font-bold mb-4">
+                        <svg class="brand-logo w-12 h-12 mr-2 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                            <path d="M12 12V22"/>
+                        </svg>
+                        Little Leafy
+                    </h3>
+                    <p class="text-gray-400">
+                        Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+                        <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+                        <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+                        <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+                        <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="font-bold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+                        <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-white transition">Our Policies & FAQs</a></li>
+                        <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+
+                    <h4 class="font-bold mb-4 mt-6">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+                        <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+                        <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+                        <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-400 mb-4">
+                        <p>45 Thiri Mingalar Street</p>
+                        <p>Bahan Township, Yangon 11201</p>
+                        <p>Phone: (095) 123-4567</p>
+                        <p>Email: kaungzawhan830@gmail.com</p>
+                    </div>
+
+                    <!-- Newsletter Section -->
+                    <h4 class="font-bold mb-2">Subscribe Our Page....</h4>
+                    <div class="flex mb-6">
+                        <input 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            class="px-3 py-2 w-full text-gray-900 rounded-l-md focus:outline-none"
+                        >
+                        <button class="bg-green-700 hover:bg-green-600 flex items-center justify-center px-4 rounded-r-md">
+                            <i class="">Subscribe</i>
+                        </button>
+                    </div>
+
+                    <!-- Social Media -->
+                    <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                <p>© 2023 Little Leafy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for store images on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const storeImages = document.querySelectorAll('.store-image');
+            const teamCards = document.querySelectorAll('.team-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            storeImages.forEach(image => {
+                image.style.opacity = 0;
+                image.style.transform = 'translateY(20px)';
+                image.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(image);
+            });
+            
+            teamCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+    <script>
+const track = document.getElementById('scrollingTrack');
+let scrollAmount = 0;
+
+function animateScroll() {
+    scrollAmount += 1; // Adjust speed here (pixels per frame)
+    if (scrollAmount >= track.scrollWidth / 2) {
+        scrollAmount = 0; // Reset scroll for seamless looping
+    }
+    track.style.transform = `translateX(-${scrollAmount}px)`;
+    requestAnimationFrame(animateScroll);
+}
+
+// Start the animation
+animateScroll();
+</script>
+
+<style>
+.scrolling-track {
+    display: flex;
+    gap: 10px; /* optional spacing between images */
+    will-change: transform; /* improves performance */
+}
+.scrolling-image img {
+    width: 200px; /* adjust width */
+    height: 150px; /* adjust height */
+    object-fit: cover;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Leafy.com</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Navbar & Logo */
+    .logo-text {
+      display: flex;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      gap: 10px;
+    }
+
+    .logo-text svg {
+      width: 64px;
+      height: 64px;
+      color: #22c55e; /* green logo */
+    }
+
+    /* FAQ hover effect */
+    .faq-item {
+      transition: all 0.3s ease;
+    }
+    .faq-item:hover {
+      background-color: #f0fdf4;
+    }
+
+    /* Footer brand logo */
+    .footer-brand .brand-logo {
+      width: 48px;
+      height: 48px;
+      margin-right: 0.5rem;
+      fill: #22c55e;
+    }
+
+    .footer-brand .brand-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Push main content below fixed navbar */
+    main {
+      padding-top: 140px; /* adjust based on navbar height */
+    }
+  </style>
+</head>
+<body class="bg-gray-50 scroll-smooth">
+
+  <!-- Fixed Navbar -->
+  <header class="fixed top-0 left-0 w-full bg-white shadow z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+
+      <!-- Logo & Mini Images -->
+      <div class="flex items-center space-x-4">
+        <div class="logo-text flex items-center space-x-2">
+          <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+            <path d="M12 12V22"/>
+          </svg>
+          <span class="text-3xl font-bold text-green-800">Little Leafy</span>
+        </div>
+        <div class="flex space-x-2">
+          <img src="https://assets.digitalcontent.marksandspencer.app/image/upload/w_2560,q_auto,f_auto/SD_FD_F44A_29350063_NC_X_EC_0" alt="Small green succulent plant" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpuhIEchEK-dJcK__fDTwvCZzwIdNq51SyzA&s" alt="Monstera leaf" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFjrgKturj4MKMmaY7lQJBDT_0bT30nNhlQ&s" alt="Indoor plants" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md" />
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="Home.html" class=" hover:text-green-600 transition-colors">🌱 Home</a>
+
+        <!-- Shop Dropdown -->
+        <div class="relative group">
+  <a href="Shop.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+    <span>🛒 Shop</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </a>
+
+          <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+            <a href="OutDoor  Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+            <a href="Succulents & Cacti.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌵 Succulents & Cacti</a>
+            <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+            <a href="Shop.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱🪴 View All Plants</a>
+          </div>
+        </div>
+
+        <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+        <a href="Login.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🔐 Login</a>
+        <a href="Help.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🆘 Help</a>
+
+        <!-- Contents Dropdown -->
+        <div class="relative group">
+          <a href="#" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+            <span>📂 Contents</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📖 Plant Guides</a>
+            <a href="Blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📰 Blog</a>
+            <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">❓ Our Policies & FAQs</a>
+            <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+   <main class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <div class="text-center mb-12">
+                <!-- Increased empty space to push content below navbar -->
+                <div class="h-24"></div> <!-- empty space of 6rem -->
+
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">How can we help you?</h1>
+            </div>
+
+            <div class="relative max-w-xl mx-auto">
+                <input type="text" placeholder="Search help articles..." class="w-full px-5 py-3 pr-12 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-green-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Orders & Shipping</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Track your order, check shipping times, or manage returns.</p>
+                    <a href="#" class="text-green-600 font-medium flex items-center">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Payments & Pricing</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Information about payment methods, pricing, and discounts.</p>
+                    <a href="#" class="text-green-600 font-medium flex items-center">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Plant Care Guides</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Learn how to care for your plants and keep them thriving.</p>
+                    <a href="#" class="text-green-600 font-medium flex items-center">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Contact Support</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Can't find what you need? Our team is here to help.</p>
+                    <a href="#" class="text-green-600 font-medium flex items-center">
+                        Contact us
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-12">
+                <h2 class="text-2xl font-semibold p-6 border-b border-gray-100">Frequently Asked Questions</h2>
+                
+                <div class="divide-y divide-gray-100">
+                    <div class="faq-item p-6 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-medium text-gray-800">How do I track my order?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="hidden mt-3 text-gray-600">
+                            <p>Once your order has shipped, you'll receive a confirmation email with a tracking number and link to track your package. You can also log in to your account to view the status of all your orders.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-6 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-medium text-gray-800">What's your return policy?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="hidden mt-3 text-gray-600">
+                            <p>We accept returns within 30 days of purchase for most items. Plants must be in healthy condition with original packaging. Please contact our customer service to initiate a return and we'll provide you with instructions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-6 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-medium text-gray-800">How often should I water my new plant?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="hidden mt-3 text-gray-600">
+                            <p>Watering needs vary by plant type. As a general rule, check the soil moisture by sticking your finger about an inch deep. If it feels dry, it's time to water. Most houseplants prefer thorough watering followed by allowing the soil to dry out slightly between waterings.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-6 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-medium text-gray-800">Do you offer international shipping?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="hidden mt-3 text-gray-600">
+                            <p>Currently, we only ship within the United States due to agricultural restrictions on live plants. We're working to expand our shipping options in the future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-green-50 rounded-xl p-8 text-center">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Still need help?</h2>
+                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Our customer care team is available to answer your questions from Monday to Friday, 9am to 5pm EST.</p>
+                <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                    Contact Support
+                </button>
+            </div>
+        </div>
+    </main>
+
+   <footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+    <div class="footer-brand">
+  <h3 class="brand-title">
+    <svg class="brand-logo" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+      <path d="M12 12V22"/>
+    </svg>
+    Little Leafy
+  </h3>
+  <p class="text-gray-400">
+    Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+  </p>
+</div>
+
+
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+          <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+          <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+          <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+           <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+          <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Service -->
+      <div>
+        <h4 class="font-bold mb-4">Customer Service</h4>
+        <ul class="space-y-2">
+          <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+          <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-white transition">Our Policies & FAQs</a></li>
+          <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+
+        </ul>
+
+        <h4 class="font-bold mb-4">Categories</h4>
+        <ul class="space-y-2">
+          <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plamts</a></li>
+          <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">Outdoor Plants</a></li>
+          <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+           <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+            <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+
+
+
+
+      </div>
+
+      <!-- Contact & Newsletter -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+        <div class="space-y-2 text-gray-400">
+          <p>45 Thiri Mingalar Street</p>
+          <p>Bahan Township, Yangon 11201</p>
+          <p>Phone: (095) 123-4567</p>
+          <p>Email: kaungzawhan830@gmail.com</p>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="mt-6">
+          <h4 class="font-medium mb-2">Subscribe Our Page....</h4>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="px-3 py-2 text-gray-800 rounded-l-lg w-full focus:outline-none">
+            <button class="bg-green-800 hover:bg-green-700 px-4 py-2 rounded-r-lg">
+              <i class="">subscribe </i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Social Icons -->
+        <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+        <div class="flex space-x-4 mb-4">
+          <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+      <p>© 2023 Little Leafy. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+    <script>
+        // Simple FAQ toggle functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('div:last-child');
+                const icon = item.querySelector('svg');
+                
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                } else {
+                    answer.classList.add('hidden');
+                    icon.classList.remove('rotate-180');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

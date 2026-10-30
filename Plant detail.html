@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <meta name="description" content="Beautiful Monstera 'Split-Leaf' plant for your home. Available in various sizes and pot types.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+    
+    <!-- CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Existing styles from your code */
+        .slider-track {
+            animation: slide 60s linear infinite;
+            will-change: transform;
+        }
+        
+        @keyframes slide {
+            0%, 15% { transform: translateX(0); }
+            20%, 35% { transform: translateX(-16.6666%); }
+            40%, 55% { transform: translateX(-33.3333%); }
+            60%, 75% { transform: translateX(-50%); }
+            80%, 95% { transform: translateX(-66.6666%); }
+            100% { transform: translateX(-83.3333%); }
+        }
+        
+        .search-input:focus + .search-dropdown,
+        .search-dropdown:hover {
+            display: block !important;
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+
+        @keyframes float2 {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float3 {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+
+        .floating { animation: float 4s ease-in-out infinite; }
+        .floating-2 { animation: float2 3.5s ease-in-out infinite; }
+        .floating-3 { animation: float3 5s ease-in-out infinite; }
+
+        @keyframes slide-left-right {
+            0% { transform: translateX(0%); }
+            50% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-container > svg {
+            width: 64px;
+            height: 64px;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #15803d;
+        }
+
+        .footer-brand .brand-logo {
+          width: 48px;
+          height: 48px;
+          margin-right: 0.5rem;
+          vertical-align: middle;
+          fill: #22c55e;
+        }
+
+        .footer-brand .brand-title {
+          display: flex;
+          align-items: center;
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+        }
+        
+        /* New styles for product page */
+        .option-selector {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option-selector:hover {
+            border-color: #22c55e;
+        }
+        
+        .option-selector.selected {
+            border-color: #22c55e;
+            background-color: #f0fdf4;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            width: fit-content;
+        }
+        
+        .quantity-btn {
+            padding: 0.5rem 1rem;
+            background: #f9fafb;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+        
+        .quantity-input {
+            width: 3rem;
+            text-align: center;
+            border: none;
+            padding: 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .add-to-cart-btn {
+            background: #16a34a;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+        }
+
+
+
+        /* Highlight selected option */
+.selected-option {
+    border: 2px solid #10B981; /* green border */
+    border-radius: 0.5rem;
+    background-color: #D1FAE5; /* light green background */
+}
+.option-selector {
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+}
+.option-selector:hover {
+    background-color: #F3F4F6; /* light hover effect */
+}
+
+
+/* Highlight selected option */
+.selected-option {
+    border: 2px solid #10B981; /* green border */
+    border-radius: 0.5rem;
+    background-color: #D1FAE5; /* light green background */
+}
+
+.option-selector {
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.option-selector:hover {
+    background-color: #F3F4F6; /* light hover effect */
+}
+
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm py-3 px-4">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+               <!-- Logo -->
+<a href="/" class="logo-container">
+    <!-- Star SVG -->
+    <svg class="logo-icon" viewBox="0 0 24 24" fill="#15803d" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+        <path d="M12 12V22"/>
+    </svg>
+    <!-- Logo Text -->
+    <span class="logo-text">Little Leafy</span>
+</a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="Home.html" class="text-gray-600 hover:text-green-700 font-medium transition-colors px-3 py-2">Home</a>
+                   <!-- Shop Dropdown -->
+<div class="relative group">
+  <a href="Shop.html" class="text-green-700 font-medium px-3 py-2 flex items-center space-x-1 hover:text-green-600 transition-colors">
+    <span>🛒 Shop</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </a>
+  
+  <!-- Dropdown Menu -->
+  <div class="absolute top-full left-0 mt-2 w-52 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+    <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+    <a href="OutDoor  Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+    <a href="Succulents & Cacti.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌵 Succulents & Cacti</a>
+    <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+    <a href="Shop.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱🪴View all Plants</a>
+  </div>
+</div>
+
+                    <a href="About.html" class="text-gray-700 hover:text-green-600 font-medium px-3 py-2">
+  📖 About
+</a>
+<a href="Login.html" class="text-gray-700 hover:text-green-600 font-medium px-3 py-2">
+  🔐 Login
+</a>
+
+                    <a href="Help.html" class="text-gray-700 hover:text-green-600 font-medium px-3 py-2">🆘Help</a>
+                    
+                   <!-- Dropdown Menu -->
+<div class="relative group">
+  <button class="flex items-center space-x-1 text-gray-600 hover:text-green-700 font-medium px-3 py-2 transition-colors">
+    <span>📂 Contents</span>
+    <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+  
+  <!-- Dropdown -->
+  <div class="absolute left-0 mt-1 w-48 bg-white rounded-lg shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100 pointer-events-none group-hover:pointer-events-auto">
+    <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">📖 Plant Care Guides</a>
+    <a href="Blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">📰 Blog</a>
+    <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">❓ Our Policies & FAQs</a>
+                            <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+  </div>
+</div>
+
+
+                </nav>
+
+               
+                    
+                    <!-- Cart Button -->
+                    <a href="Login.html" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-full transition-colors flex items-center justify-center h-10 w-10 md:h-auto md:w-auto md:px-4" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="ml-2 hidden md:inline">Cart</span>
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden text-gray-600 hover:text-green-700 focus:outline-none h-10 w-10 flex items-center justify-center" aria-label="Menu" id="mobileMenuButton">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="mobile-menu hidden md:hidden bg-white mt-2 rounded-lg shadow-lg overflow-hidden" id="mobileMenu">
+                <div class="px-2 py-2 space-y-1">
+                    <a href="index.html" class="block px-4 py-2 rounded hover:bg-green-50 transition-colors">Home</a>
+                    <a href="shop.html" class="block px-4 py-2 rounded hover:bg-green-50 transition-colors">Shop</a>
+                    <a href="about.html" class="block px-4 py-2 rounded hover:bg-green-50 transition-colors">About</a>
+                    <a href="help.html" class="block px-4 py-2 rounded hover:bg-green-50 transition-colors">Help</a>
+                    <div class="px-4 py-2">
+                        <div class="font-medium mb-1">Contents</div>
+                        <div class="space-y-1 ml-2">
+                            <a href="guides.html" class="block px-2 py-1 rounded hover:bg-green-50 transition-colors">Plant Guides</a>
+                            <a href="blog.html" class="block px-2 py-1 rounded hover:bg-green-50 transition-colors">Blog</a>
+                            <a href="faq.html" class="block px-2 py-1 rounded hover:bg-green-50 transition-colors">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Detail Section -->
+    <section class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Product Image -->
+            <div class="flex justify-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f0eccb45-91ab-42f0-b849-30e0ba028ad5.png" 
+                     alt="Monstera Split-Leaf" 
+                     class="rounded-lg shadow-lg w-full max-w-md floating">
+            </div>
+            
+            <!-- Product Details -->
+            <div>
+                <h1 class="text-3xl font-bold text-green-800 mb-2">Monstera 'Split-Leaf'</h1>
+                <p class="text-green-700 font-semibold text-xl mb-6">$15.99</p>
+                
+                <!-- Size Options -->
+                <div class="mb-8">
+                    <h3 class="font-semibold text-lg mb-3">Size</h3>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="option-selector" data-option="size" data-value="2inch">
+                            <p class="text-center font-medium">2" Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="size" data-value="4inch">
+                            <p class="text-center font-medium">4" Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="size" data-value="6inch">
+                            <p class="text-center font-medium">6" Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="size" data-value="8inch">
+                            <p class="text-center font-medium">8" Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="size" data-value="10inch">
+                            <p class="text-center font-medium">10" Pot</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pot Type Options -->
+                <div class="mb-8">
+                    <h3 class="font-semibold text-lg mb-3">Pot Type</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="option-selector" data-option="pot" data-value="nursery">
+                            <p class="text-center font-medium">Nursery Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="pot" data-value="black-cylinder">
+                            <p class="text-center font-medium">Black Cylinder</p>
+                        </div>
+                        <div class="option-selector" data-option="pot" data-value="white-cylinder">
+                            <p class="text-center font-medium">White Cylinder</p>
+                        </div>
+                        <div class="option-selector" data-option="pot" data-value="cow">
+                            <p class="text-center font-medium">Cow Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="pot" data-value="terra-cotta">
+                            <p class="text-center font-medium">Terra Cotta Eco-Pot</p>
+                        </div>
+                        <div class="option-selector" data-option="pot" data-value="black-eco">
+                            <p class="text-center font-medium">Black Eco-Pot</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantity Selector -->
+                <div class="mb-8">
+                    <h3 class="font-semibold text-lg mb-3">Quantity</h3>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" id="decrease-qty">-</button>
+                        <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="99">
+                        <button class="quantity-btn" id="increase-qty">+</button>
+                    </div>
+                </div>
+                
+                <!-- Add to Cart Button -->
+               <a href="Login.html" class="add-to-cart-btn w-full mb-6 inline-block text-center bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 transition">
+  Buy Now
+</a>
+
+                <!-- Payment Options -->
+                <div class="text-center">
+                    <p class="text-gray-600 mb-2">Buy with shop Pay</p>
+                    <p class="text-gray-600 text-sm">More payment options</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Description -->
+        <div class="mt-16 max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-green-800 mb-6">About Monstera 'Split-Leaf'</h2>
+            <p class="text-gray-700 mb-4">
+                The Monstera 'Split-Leaf', also known as Monstera deliciosa, is a tropical plant native to Central America. 
+                It's famous for its large, glossy leaves with natural splits and holes, giving it the nickname "Swiss Cheese Plant".
+            </p>
+            <p class="text-gray-700 mb-4">
+                This easy-care plant thrives in bright, indirect light and prefers slightly moist soil. It's an excellent 
+                air-purifying plant that can grow quite large, making it a stunning statement piece in any room.
+            </p>
+            <p class="text-gray-700">
+                Our Monstera plants are carefully selected for their health and beauty, ensuring you receive a plant that 
+                will thrive in your home environment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+<section class="container mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-green-800 mb-8">You Might Also Like</h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Related Product 1 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+            <div class="p-4 flex justify-center h-48">
+                <a href="Shop.html">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2dc1fb84-aad4-4ca9-8b31-592993df7cb8.png" 
+                         alt="Pothos 'Golden'" 
+                         class="object-contain h-full">
+                </a>
+            </div>
+            <div class="p-4 text-center">
+                <h4 class="font-bold text-lg mb-1">Pothos 'Golden'</h4>
+                <p class="text-gray-600 text-sm mb-2">Easy-care trailing plant</p>
+                <div class="font-bold text-green-700">from $21.90</div>
+            </div>
+        </div>
+        
+        <!-- Related Product 2 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+            <div class="p-4 flex justify-center h-48">
+                <a href="Shop.html">
+                    <img src="https://plantsguru.com/cdn/shop/files/Philodendron-Brasil_-Photoroom_2.jpg?v=1736447322&width=1500" 
+                         alt="Philodendron 'Heartleaf'" 
+                         class="object-contain h-full">
+                </a>
+            </div>
+            <div class="p-4 text-center">
+                <h4 class="font-bold text-lg mb-1">Philodendron 'Heartleaf'</h4>
+                <p class="text-gray-600 text-sm mb-2">Classic heart-shaped leaves</p>
+                <div class="font-bold text-green-700">from $14.90</div>
+            </div>
+        </div>
+        
+        <!-- Related Product 3 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+            <div class="p-4 flex justify-center h-48">
+                <a href="Shop.html">
+                    <img src="https://www.succulentsdepot.com/cdn/shop/products/20210219_164722_1800x.jpg?v=1614222529" 
+                         alt="Pilea peperomioides 'Chinese'" 
+                         class="object-contain h-full">
+                </a>
+            </div>
+            <div class="p-4 text-center">
+                <h4 class="font-bold text-lg mb-1">Pilea 'Chinese Money'</h4>
+                <p class="text-gray-600 text-sm mb-2">Unique circular leaves</p>
+                <div class="font-bold text-green-700">$24.99</div>
+            </div>
+        </div>
+        
+        <!-- Related Product 4 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+            <div class="p-4 flex justify-center h-48">
+                <a href="Shop.html">
+                    <img src="https://www.beardsanddaisies.co.uk/cdn/shop/files/BD_ZZ_FAMILY_1000x1100_5d75a883-2430-46b4-831e-402659b3e3b0.jpg?crop=center&height=800&v=1711115361&width=800" 
+                         alt="Zamioculcas Zamiifolia" 
+                         class="object-contain h-full">
+                </a>
+            </div>
+            <div class="p-4 text-center">
+                <h4 class="font-bold text-lg mb-1">ZZ Plant</h4>
+                <p class="text-gray-600 text-sm mb-2">Nearly indestructible</p>
+                <div class="font-bold text-green-700">$35.99</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="footer-brand">
+                    <h3 class="brand-title">
+                        <svg class="brand-logo" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                            <path d="M12 12V22"/>
+                        </svg>
+                        Little Leafy
+                    </h3>
+                    <p class="text-gray-400">
+                        Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+                        <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+                        <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+                        <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+                        <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+                    </ul>
+                </div>
+
+                <div> 
+                    <h4 class="font-bold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+                        <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-green-600 transition">Our Policies & FAQs</a></li>
+                        <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+
+                    <h4 class="font-bold mb-4 mt-6">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+                        <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+                        <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+                        <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>45 Thiri Mingalar Street</p>
+                        <p>Bahan Township, Yangon 11201</p>
+                        <p>Phone: (095) 123-4567</p>
+                        <p>Email: kaungzawhan830@gmail.com</p>
+                    </div>
+
+                    <!-- Newsletter Section -->
+                    <div class="mt-6">
+                        <h4 class="font-medium mb-2">Subscribe Our Page....</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Enter your email" class="px-3 py-2 text-gray-800 rounded-l-lg w-full focus:outline-none">
+                            <button class="bg-green-800 hover:bg-green-700 px-4 py-2 rounded-r-lg text-white">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+
+                    <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                       <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+     
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 Little Leafy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchDropdown = document.querySelector('.search-dropdown');
+        
+        searchInput.addEventListener('focus', () => {
+            searchDropdown.classList.remove('hidden');
+        });
+        
+        searchInput.addEventListener('blur', () => {
+            setTimeout(() => {
+                if (!searchDropdown.matches(':hover')) {
+                    searchDropdown.classList.add('hidden');
+                }
+            }, 200);
+        });
+        
+        // Option selection functionality
+        document.querySelectorAll('.option-selector').forEach(option => {
+            option.addEventListener('click', function() {
+                const optionType = this.getAttribute('data-option');
+                
+                // Remove selected class from all options of this type
+                document.querySelectorAll(`.option-selector[data-option="${optionType}"]`).forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+        
+     
+
+
+        
+        // Add to cart functionality
+        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+            const selectedSize = document.querySelector('.option-selector[data-option="size"].selected');
+            const selectedPot = document.querySelector('.option-selector[data-option="pot"].selected');
+            const quantity = document.getElementById('quantity').value;
+            
+            if (!selectedSize) {
+                alert('Please select a size');
+                return;
+            }
+            
+            if (!selectedPot) {
+                alert('Please select a pot type');
+                return;
+            }
+            
+            // In a real implementation, this would add to cart
+            alert(`Added to cart: Monstera 'Split-Leaf' (${selectedSize.getAttribute('data-value')}, ${selectedPot.getAttribute('data-value')}) x ${quantity}`);
+        });
+    </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const quantityInput = document.getElementById('quantity');
+    const decreaseBtn = document.getElementById('decrease-qty');
+    const increaseBtn = document.getElementById('increase-qty');
+
+    decreaseBtn.addEventListener('click', () => {
+        let value = parseInt(quantityInput.value);
+        if (value > 1) quantityInput.value = value - 1;
+    });
+
+    increaseBtn.addEventListener('click', () => {
+        let value = parseInt(quantityInput.value);
+        if (value < 99) quantityInput.value = value + 1;
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const potOptions = document.querySelectorAll('.option-selector');
+    let selectedPot = null; // store the selected pot value
+
+    potOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            // Remove active class from all options
+            potOptions.forEach(opt => opt.classList.remove('selected-option'));
+
+            // Add active class to clicked option
+            option.classList.add('selected-option');
+
+            // Store the selected value
+            selectedPot = option.getAttribute('data-value');
+            console.log('Selected Pot:', selectedPot);
+        });
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Quantity Selector
+    const quantityInput = document.getElementById('quantity');
+    const decreaseBtn = document.getElementById('decrease-qty');
+    const increaseBtn = document.getElementById('increase-qty');
+
+    decreaseBtn.addEventListener('click', () => {
+        let value = parseInt(quantityInput.value);
+        if (value > 1) quantityInput.value = value - 1;
+    });
+
+    increaseBtn.addEventListener('click', () => {
+        let value = parseInt(quantityInput.value);
+        if (value < 99) quantityInput.value = value + 1;
+    });
+
+    // Option Selectors (Pot, Size, etc.)
+    const allOptions = document.querySelectorAll('.option-selector');
+    const selectedOptions = {}; // Store selected values by option type
+
+    allOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const type = option.getAttribute('data-option');
+
+            // Remove 'selected-option' class for the same type
+            document.querySelectorAll(`.option-selector[data-option="${type}"]`)
+                .forEach(opt => opt.classList.remove('selected-option'));
+
+            // Add 'selected-option' class to clicked option
+            option.classList.add('selected-option');
+
+            // Store selected value
+            selectedOptions[type] = option.getAttribute('data-value');
+            console.log(`Selected ${type}:`, selectedOptions[type]);
+        });
+    });
+});
+</script>
+
+
+
+
+
+
+</body>
+</html>

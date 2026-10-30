@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little leafy.com</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #81c784;
+            --accent: #ffab00;
+            --white: #ffffff;
+            --light-bg: #f5f5f5;
+            --text: #333333;
+            --text-light: #666666;
+            --footer-bg: #1e293b;
+            --footer-text: #cbd5e1;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        /* Navigation Styles */
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        nav.fixed-nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo-text svg {
+            width: 64px;
+            height: 64px;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .plant-previews {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .plant-previews img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .desktop-nav {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 60px 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/><path d="M12 12V22"/></svg>');
+            background-size: 100px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #ffc107;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 171, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Pricing Section */
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 16px;
+            width: 320px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            position: relative;
+            border-top: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border-top: 4px solid var(--accent);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: var(--accent);
+            color: var(--text);
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .pricing-card h3 {
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .price {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--text);
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: normal;
+            color: var(--text-light);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+            flex-grow: 1;
+        }
+        
+        .pricing-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 28px;
+        }
+        
+        .pricing-features li:before {
+            content: "✓";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        /* Plant Guides Section */
+        .guide-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+        
+        .guide-section h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .plant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .plant-card {
+            background: var(--light-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .plant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .plant-card.premium {
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+        
+        .premium-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: var(--text);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 12px;
+            z-index: 2;
+        }
+        
+        .plant-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .plant-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .plant-info h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        .plant-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .plant-price {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .plant-description {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .plant-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 13px;
+            flex-grow: 1;
+        }
+        
+        .plant-features li {
+            padding: 4px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .plant-features li:before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 8px;
+        }
+        
+        .learn-more-container {
+            margin-top: auto;
+            padding-top: 15px;
+        }
+        
+        .learn-more {
+            display: block;
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid var(--accent);
+        }
+        
+        .learn-more:hover {
+            background-color: #FFC107;
+            text-decoration: underline;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h4 {
+            color: var(--white);
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .brand-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--white);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .brand-logo svg {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .brand-tagline {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-family: inherit;
+        }
+        
+        .newsletter-form button {
+            padding: 0 20px;
+            background-color: var(--accent);
+            color: var(--text);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #FFC107;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            
+            .mobile-nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                z-index: 999;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+            
+            .mobile-nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .mobile-nav .nav-link {
+                display: block;
+                padding: 12px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .mobile-dropdown {
+                padding-left: 20px;
+            }
+            
+            .mobile-dropdown a {
+                display: block;
+                padding: 10px 0;
+                color: var(--text-light);
+                text-decoration: none;
+            }
+        }
+
+        /* Footer Brand Logo Styling */
+.brand-logo .brand-logo-icon {
+  width: 48px;         /* Logo width */
+  height: 48px;        /* Logo height */
+  margin-right: 0.5rem; 
+  vertical-align: middle;
+  fill: #22c55e;       /* Green color */
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;  /* Align text with logo vertically */
+  font-size: 1.25rem;   /* Font size for "Little Leaf" text */
+  font-weight: 700;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="phone-fix">
+@media (max-width:768px){
+  html,body{overflow-x:hidden}
+  .plant-previews{display:none!important}
+  .nav-container{padding:10px 14px!important}
+  .logo-text{font-size:1.3rem!important;white-space:nowrap}
+  .logo-text svg{width:40px!important;height:40px!important}
+}
+</style>
+</head>
+<body class="scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed-nav">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-section">
+                <a href="#" class="logo-text">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                        <path d="M12 12V22"/>
+                    </svg>
+                    Little Leaf
+                </a>
+                <div class="plant-previews">
+                    <img src="https://assets.digitalcontent.marksandspencer.app/image/upload/w_2560,q_auto,f_auto/SD_FD_F44A_29350063_NC_X_EC_0" alt="Small green succulent plant">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpuhIEchEK-dJcK__fDTwvCZzwIdNq51SyzA&s" alt="Monstera leaf">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFjrgKturj4MKMmaY7lQJBDT_0bT30nNhlQ&s" alt="Indoor plants">
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav">
+                <a href="Home.html" class="nav-link">🌱 Home</a>
+
+                <!-- Shop Dropdown -->
+                <div class="dropdown">
+                    <a href="Shop.html" class="nav-link">
+                        <span>🛒 Shop</span>
+                        <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="Shop Indoor Plants.html">🌱 Indoor Plants</a>
+                        <a href="OutDoor  Plants.html">🌳 Outdoor Plants</a>
+                        <a href="Succulents & Cacti.html">🌵 Succulents & Cacti</a>
+                        <a href="New Arrivals.html">🌸 New Arrivals</a>
+                        <a href="Shop.html">🌿 View all Plants</a>
+                    </div>
+                </div>
+
+                <a href="About.html" class="nav-link">📖 About</a>
+                         <a href="Login.html" class="nav-link">🔐 Login</a>
+                <a href="Help.html" class="nav-link">🆘 Help</a>
+                
+
+                <!-- Contents Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="nav-link">
+                        <span>📂 Contents</span>
+                        <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="All Plant Guide.html">📖 Plant Care Guides</a>
+                        <a href="Blog.html">📰 Blog</a>
+                        <a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs">❓ Our Policies & FAQs</a>
+                        <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-pattern"></div>
+            <h1>Little Leaf Premium Plant Care</h1>
+            <p>Access exclusive plant care guides, premium content, and personalized advice from our horticulture experts. Elevate your plant parenting journey today.</p>
+            
+        </section>
+
+        <section id="pricing">
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-card-content">
+                        <h3>Starter</h3>
+                        <div class="price">$9<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>Basic plant care guides</li>
+                            <li>50+ common plant profiles</li>
+                            <li>Monthly care reminders</li>
+                            <li>Community access</li>
+                            <li>Email support</li>
+                            <li>Seasonal plant care tips</li>
+                        </ul>
+                        <div class="btn-container">
+                            <a href="Login.html" class="btn">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="pricing-card-content">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="price">$19<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>All Starter features</li>
+                            <li>200+ premium plant profiles</li>
+                            <li>Weekly expert webinars</li>
+                            <li>Personalized care plans</li>
+                            <li>Priority support</li>
+                            <li>Discounts on plants & tools</li>
+                        </ul>
+                        <div class="btn-container">
+                            <a href="Login.html" class="btn">Choose Premium</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-content">
+                        <h3>Professional</h3>
+                        <div class="price">$49<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>All Premium features</li>
+                            <li>Unlimited 1-on-1 consultations</li>
+                            <li>Plant health diagnostics</li>
+                            <li>Custom care schedules</li>
+                            <li>Early access to new content</li>
+                            <li>VIP customer service</li>
+                        </ul>
+                        <div class="btn-container">
+                            <a href="Login.html" class="btn">Go Professional</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guides" class="guide-section">
+            <h2>Premium Plant Guides (Overview)</h2>
+            <div class="plant-grid">
+                <div class="plant-card premium">
+                    <div class="premium-tag">Premium</div>
+                    <a href="#pricing">
+                        <img src="https://www.gardenia.net/wp-content/uploads/2024/02/shutterstock_2112454850-752x533.jpg" alt="Rare Monstera" class="plant-image">
+                    </a>
+                    <div class="plant-info">
+                        <h3>Monstera Albo Variegata</h3>
+                        <div class="plant-meta">
+                            <span>Difficulty: Advanced</span>
+                            <span class="plant-price">$129+</span>
+                        </div>
+                        <p class="plant-description">The highly sought-after variegated Monstera.</p>
+                        <ul class="plant-features">
+                            <li>Light: Bright indirect light</li>
+                            <li>Humidity: 60-80% ideal</li>
+                            <li>Special Care: Prone to root rot</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card">
+                    <a href="#pricing">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiJzX8ddi1vB80UIEZobJNdk1GjvCT9jw5cw&s" alt="Snake Plant" class="plant-image">
+                    </a>
+                    <div class="plant-info">
+                        <h3>Snake Plant</h3>
+                        <div class="plant-meta">
+                            <span>Difficulty: Beginner</span>
+                            <span class="plant-price">$25-$60</span>
+                        </div>
+                        <p class="plant-description">Nearly indestructible and perfect for low-light conditions.</p>
+                        <ul class="plant-features">
+                            <li>Light: Low to bright indirect</li>
+                            <li>Water: Every 2-3 weeks</li>
+                            <li>Special Care: Overwatering danger</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card premium">
+                    <div class="premium-tag">Premium</div>
+                    <a href="#pricing">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhTag98AqSYtp5_IubqNdmsu2OfIs7zEn5A&s" alt="Philodendron Pink Princess" class="plant-image">
+                    </a>
+                    <div class="plant-info">
+                        <h3>Philodendron Pink Princess</h3>
+                        <div class="plant-meta">
+                            <span>Difficulty: Intermediate</span>
+                            <span class="plant-price">$89-$250</span>
+                        </div>
+                        <p class="plant-description">Striking dark green leaves with bubblegum pink variegation.</p>
+                        <ul class="plant-features">
+                            <li>Light: Medium to bright indirect</li>
+                            <li>Humidity: 50%+ preferred</li>
+                            <li>Special Care: Pruning for variegation</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card premium">
+                    <div class="premium-tag">Premium</div>
+                    <a href="#pricing">
+                        <img src="https://nurserynisarga.in/wp-content/uploads/2021/10/fiddle-fig-2.webp" alt="Fiddle Leaf Fig" class="plant-image">
+                    </a>
+                    <div class="plant-info">
+                        <h3>Fiddle Leaf Fig</h3>
+                        <div class="plant-meta">
+                            <span>Difficulty: Intermediate</span>
+                            <span class="plant-price">$45-$150</span>
+                        </div>
+                        <p class="plant-description">Dramatic large leaves that make a statement in any room.</p>
+                        <ul class="plant-features">
+                            <li>Light: Bright indirect</li>
+                            <li>Water: When top soil is dry</li>
+                            <li>Special Care: Sensitive to movement</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card">
+                    <a href="#pricing">
+                        <img src="https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2020/1/7/1/shutterstock_1379927963_woman-watering_zz_plant.jpg.rend.hgtvcom.1280.1280.85.suffix/1578425510509.webp" alt="ZZ Plant" class="plant-image">
+                    </a>
+                    <div class="plant-info">
+                        <h3>ZZ Plant</h3>
+                        <div class="plant-meta">
+                            <span>Difficulty: Beginner</span>
+                            <span class="plant-price">$30-$75</span>
+                        </div>
+                        <p class="plant-description">Thrives on neglect with glossy, waxy leaves that purify the air.</p>
+                        <ul class="plant-features">
+                            <li>Light: Low to bright indirect</li>
+                            <li>Water: Every 3-4 weeks</li>
+                            <li>Special Care: Toxic if ingested</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card premium">
+                    <div class="premium-tag">Premium</div>
+                    <a href="#pricing">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8aw1esPQBjgXStTosY-DPATzYEx_ecDl0ow&s" alt="Anthurium Clarinervium" class="plant-image">
+                    </a>
+                    <div class="plant-info">
+                        <h3>Anthurium Clarinervium</h3>
+                        <div class="plant-meta">
+                            <span>Difficulty: Advanced</span>
+                            <span class="plant-price">$95-$300</span>
+                        </div>
+                        <p class="plant-description">Velvety heart-shaped leaves with striking white veins.</p>
+                        <ul class="plant-features">
+                            <li>Light: Bright indirect</li>
+                            <li>Humidity: 70%+ ideal</li>
+                            <li>Special Care: Requires chunky soil mix</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section">
+            <h2>Premium Care Techniques (Overview)</h2>
+            <div class="plant-grid">
+                <div class="plant-card premium">
+                    <div class="premium-tag">Premium</div>
+                    <img src="https://www.skh.com/wp-content/uploads/2025/01/image6-8.jpg" alt="Propagation Techniques" class="plant-image">
+                    <div class="plant-info">
+                        <h3>Advanced Propagation</h3>
+                        <div class="plant-meta">
+                            <span>Success Rate: 85%+</span>
+                        </div>
+                        <p class="plant-description">Master tissue culture, air layering, and node propagation for rare plants.</p>
+                        <ul class="plant-features">
+                            <li>Step-by-step video guides</li>
+                            <li>Troubleshooting common issues</li>
+                            <li>Seasonal propagation calendar</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="plant-card premium">
+                    <div class="premium-tag">Premium</div>
+                    <img src="https://www.saferbrand.com/media/wysiwyg/sb/cms/organic-gardening/sb-lc-article-header-organic-pest-control.jpg" alt="Pest Management" class="plant-image">
+                    <div class="plant-info">
+                        <h3>Organic Pest Management</h3>
+                        <div class="plant-meta">
+                            <span>Prevention Focused</span>
+                        </div>
+                        <p class="plant-description">Chemical-free solutions for spider mites, mealybugs, and scale.</p>
+                        <ul class="plant-features">
+                            <li>Identification guides</li>
+                            <li>Homemade remedy recipes</li>
+                            <li>Quarantine protocols</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="plant-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL88gCWHXlaZ10OJmc5hZQ9jE7jMVUeCQ47A&s" alt="Watering Systems" class="plant-image">
+                    <div class="plant-info">
+                        <h3>Smart Watering Systems</h3>
+                        <div class="plant-meta">
+                            <span>Tech Integration</span>
+                        </div>
+                        <p class="plant-description">Automate your plant care with the latest watering technology.</p>
+                        <ul class="plant-features">
+                            <li>Product comparisons</li>
+                            <li>Installation guides</li>
+                            <li>Seasonal adjustments</li>
+                        </ul>
+                        <div class="learn-more-container">
+                            <a href="#pricing" class="learn-more">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+  <div class="footer-container">
+    <!-- Brand Info -->
+    <div class="footer-column brand-info">
+      <div class="brand-logo">
+        <svg class="brand-logo-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+          <path d="M12 12V22"/>
+        </svg>
+        Little Leaf
+      </div>
+      <p class="brand-tagline">
+        Bringing nature home, one plant at a time. Your trusted partner in creating beautiful, healthy spaces.
+      </p>
+      <div class="social-links">
+       
+      </div>
+    </div>
+
+
+            <!-- Quick Links -->
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="Shop.html">Shop</a></li>
+                    <li><a href="About.html">About Us</a></li>
+                    <li><a href="Help.html">Help</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="Visit Us.html">Visit Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Categories -->
+            <div class="footer-column">
+ <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="All Plant Guide.html">Plant Care Guides</a></li>
+                    <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs">Our Policies & FAQs</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    
+
+
+
+
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="Shop Indoor Plants.html">Indoor Plants</a></li>
+                    <li><a href="OutDoor  Plants.html">Outdoor Plants</a></li>
+                    <li><a href="Succulents & Cacti.html">Succulents & Cacti</a></li>
+                    <li><a href="New Arrivals.html">New Arrivals</a></li>
+                    <li><a href="Shop.html">View All Plants</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Newsletter -->
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <p>45 Thiri Mingalar Street</p>
+                <p>Bahan Township, Yangon 11201</p>
+                <p>Phone: (095) 123-4567</p>
+                <p>Email: contact@littleleaf.com</p>
+                
+                <h4>Subscribe Our Page....</h4>
+                <p>Subscribe for plant care tips and exclusive offers</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit">Subscribe</button>
+                </div>
+                 <h4 class="footer-subheading" style="margin-top: 1.5rem;">Connect With Us</h4>
+                 <div class="social-links">
+
+        <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+      </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 Little Leaf. All rights reserved. Made with care for plant lovers everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileMenuBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (mobileNav.classList.contains('active')) {
+                        mobileNav.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'plant-green': '#2e8b57',
+                        'leaf-green': '#3cb371',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+
+        .plant-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .plant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+        .category-btn.active, .category-btn:hover {
+            background-color: #2e8b57;
+            color: white;
+        }
+
+
+    </style>
+<style id="phone-fix">
+@media (max-width:767px){
+  html,body{overflow-x:hidden}
+  .container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}
+  .container input[placeholder^="Search"]{width:6.5rem!important;padding-left:.75rem!important;padding-right:.75rem!important}
+  .container .text-2xl.font-semibold{font-size:1.15rem!important;white-space:nowrap}
+  .container svg.w-12{width:2rem!important;height:2rem!important}
+  header .container,header nav>div{max-width:100%}
+  .search-input,#searchInput{width:7rem!important;padding-left:.75rem!important;padding-right:.75rem!important}
+  .logo-text{font-size:1.15rem!important;white-space:nowrap}
+  .logo-container>svg,.logo-icon{width:32px!important;height:32px!important}
+  header .space-x-3>*+*{margin-left:.4rem!important}
+}
+</style>
+</head>
+<body class="scroll-smooth bg-gray-50">
+    <!-- Navigation -->
+<nav class="bg-white shadow fixed w-full top-0 z-50">
+  <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+    
+    <!-- Left: Logo -->
+    <div class="flex items-center space-x-2">
+      <svg class="w-12 h-12 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+        <path d="M12 12V22"/>
+      </svg>
+      <span class="text-2xl font-semibold text-green-700">Little Leafy</span>
+
+    </div>
+
+    <!-- Center: Links -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="Home.html" class=" text-gray-700 hover:text-green-600 font-medium">🌱 Home</a>
+      
+      <!-- Shop Dropdown -->
+<div class="relative group">
+  <a href="Shop.html" class="flex items-center text-gray-700 hover:text-green-600 font-medium space-x-1">
+    <span>🛒 Shop</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </a>
+  
+  <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+    <a href="Shop Indoor Plants.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+    <a href="OutDoor  Plants.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+    <a href="Succulents & Cacti.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌵 Succulents & Cacti</a>
+    <a href="New Arrivals.html" class="block px-4 py-2 text-green-600 font-semibold hover:bg-green-50">🌸 New Arrival</a>
+    <a href="Shop.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🪴 View All Plants</a>
+  </div>
+</div>
+
+
+      <a href="About.html" class="text-gray-700 hover:text-green-600 font-medium">📖 About</a>
+      <a href="Login.html" class="text-gray-700 hover:text-green-600 font-medium">🔐 Login</a>
+      <a href="Help.html" class="text-gray-700 hover:text-green-600 font-medium">🆘 Help</a>
+
+      <!-- Contents Dropdown -->
+      <div class="relative group">
+        <button class="flex items-center text-gray-700 hover:text-green-600 font-medium space-x-1">
+          <span>📂 Contents</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <a href="All Plant Guide.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">📖 Plant Care Guides</a>
+          <a href="Blog.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">📰 Blog</a>
+          <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">❓ Policies & FAQs</a>
+           <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Search & Cart -->
+    <div class="flex items-center space-x-3">
+      <input type="text" placeholder="Search plants..." class="px-4 py-2 border border-gray-300 rounded-full w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-green-500">
+      <a href="Plant detail.html" class="flex items-center bg-green-600 text-white px-3 py-2 rounded-full hover:bg-green-700 transition-colors">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="ml-2 hidden md:inline">Cart</span>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-gray-600 hover:text-green-700 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 px-4 md:px-8">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-green-50 to-emerald-100 rounded-2xl p-8 md:p-12 mb-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-plant-green mb-4">New Arrivals</h1>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-6">
+                Discover our latest additions! Fresh plants just arrived and waiting to find their forever homes.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <button class="category-btn active px-6 py-2 rounded-full border border-plant-green text-plant-green font-medium" data-category="all">
+                    All Plants
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border border-plant-green text-plant-green font-medium" data-category="indoor">
+                    Indoor Plants
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border border-plant-green text-plant-green font-medium" data-category="outdoor">
+                    Outdoor Plants
+                </button>
+                <button class="category-btn px-6 py-2 rounded-full border border-plant-green text-plant-green font-medium" data-category="succulents">
+                    Succulents & Cacti
+                </button>
+            </div>
+        </section>
+
+       <!-- Products Grid -->
+<section class="container mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <!-- Indoor Plants -->
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="indoor">
+            <div class="h-56 overflow-hidden">
+                <img src="https://www.passionjardins.com/content/uploads/2023/11/img_6883_jpg-768x1024.jpg" 
+                     alt="Monstera Deliciosa" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Indoor</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Monstera Deliciosa</h3>
+                <p class="text-gray-600 mb-3">Beautiful Swiss cheese plant with unique leaf patterns.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$34.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="indoor">
+            <div class="h-56 overflow-hidden">
+                <img src="https://www.capegazette.com/sites/capegazette/files/2020/12/field/image/peace%20lily.jpg" 
+                     alt="Peace Lily" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Indoor</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Peace Lily</h3>
+                <p class="text-gray-600 mb-3">Elegant plant with dark green leaves and white flowers.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$24.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Outdoor Plants -->
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="outdoor">
+            <div class="h-56 overflow-hidden">
+                <img src="https://www.voyageursoapandcandle.com/cdn/shop/products/63880-2.jpg?v=1509392612" 
+                     alt="Lavender" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Outdoor</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Lavender</h3>
+                <p class="text-gray-600 mb-3">Fragrant purple flowers perfect for gardens and borders.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$18.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="outdoor">
+            <div class="h-56 overflow-hidden">
+                <img src="https://www.rootsplants.co.uk/cdn/shop/files/SHR0403-2_ef6f9dd2-f1f6-4c4d-8b72-efed536855b7.jpg?v=1715504060" 
+                     alt="Rose Bush" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Outdoor</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Hybrid Tea Rose</h3>
+                <p class="text-gray-600 mb-3">Beautiful flowering bush with fragrant blooms.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$29.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Succulents & Cacti -->
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="succulents">
+            <div class="h-56 overflow-hidden">
+                <img src="https://www.bhimtalnursery.com/wp-content/uploads/2022/06/Echeveria-Perle-Von-Nurnberg-Succulent-3-1-1000x1000.jpg" 
+                     alt="Echeveria Succulent" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Succulent</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Echeveria 'Perle von Nurnberg'</h3>
+                <p class="text-gray-600 mb-3">Beautiful purple-toned rosette succulent.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$12.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="succulents">
+            <div class="h-56 overflow-hidden">
+                <img src="https://cvwatercounts.com/wp-content/uploads/2024/03/2_Plant-of-the-Month_Barrel-Cactus.jpg" 
+                     alt="Golden Barrel Cactus" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Cactus</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Golden Barrel Cactus</h3>
+                <p class="text-gray-600 mb-3">Round, golden-spined cactus perfect for sunny spots.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$16.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- More plants -->
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="indoor">
+            <div class="h-56 overflow-hidden">
+                <img src="https://www.palasa.co.in/cdn/shop/articles/IMG_20220226_173034_1.jpg?v=1694161186" 
+                     alt="Fiddle Leaf Fig" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Indoor</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Fiddle Leaf Fig</h3>
+                <p class="text-gray-600 mb-3">Trendy plant with large, violin-shaped leaves.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$49.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="plant-card bg-white rounded-lg overflow-hidden shadow-md" data-category="succulents">
+            <div class="h-56 overflow-hidden">
+                <img src="https://unionbio.it/wp-content/uploads/2022/06/Aloe-pexels-florin-g-daniel-11379482.jpg" 
+                     alt="Aloe Vera" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-5">
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Succulent</span>
+                <h3 class="text-xl font-semibold mt-2 mb-1">Aloe Vera</h3>
+                <p class="text-gray-600 mb-3">Healing succulent with soothing gel inside leaves.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-plant-green">$14.99</span>
+                    <a href="Plant detail.html" class="text-white bg-plant-green hover:bg-leaf-green focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="mt-16 bg-plant-green rounded-2xl p-8 md:p-12 text-white text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Updated on New Arrivals</h2>
+            <p class="max-w-2xl mx-auto mb-6">Subscribe to our newsletter to be the first to know about our newest plant additions and exclusive offers.</p>
+            <div class="flex max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-lg text-gray-900 focus:outline-none">
+                <button class="bg-leaf-green hover:bg-green-400 px-6 py-3 rounded-r-lg font-semibold transition-colors">Subscribe</button>
+            </div>
+        </section>
+    </main>
+
+   <!-- Footer -->
+<footer class="bg-[#1f2937] text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Footer Brand -->
+      <div class="footer-brand">
+        <h3 class="flex items-center space-x-2 font-bold text-xl mb-4">
+          <svg class="w-12 h-12 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+            <path d="M12 12V22"/>
+          </svg>
+          <span>Little Leafy</span>
+        </h3>
+        <p class="text-gray-400">
+          Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+        </p>
+      </div>
+
+   
+  
+
+
+
+            <!-- Quick Links -->
+            <div>
+              <h4 class="font-bold mb-4">Quick Links</h4>
+              <ul class="space-y-2">
+                <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+                <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+                <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+                 <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+                  <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+              </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div>
+              <h4 class="font-bold mb-4">Customer Service</h4>
+              <ul class="space-y-2">
+                <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+                <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-white transition">Our Policies & FAQs</a></li>
+                <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+              </ul>
+
+              <h4 class="font-bold mb-4 mt-6">Categories</h4>
+              <ul class="space-y-2">
+                <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+                <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+                <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+                <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition ">New Arrivals</a></li>
+                    <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+              </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+              <h4 class="font-bold mb-4">Contact Info</h4>
+              <div class="space-y-2 text-gray-400 mb-4">
+                <p>45 Thiri Mingalar Street</p>
+                <p>Bahan Township, Yangon 11201</p>
+                <p>Phone: (095) 123-4567</p>
+                <p>Email: kaungzawhan830@gmail.com</p>
+              </div>
+
+              <!-- Newsletter Section -->
+              <h4 class="font-bold mb-2">Subscribe Our Page....</h4>
+              <div class="flex mb-6">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  class="px-3 py-2 w-full text-gray-900 rounded-l-md focus:outline-none"
+                >
+                <button class="bg-green-700 hover:bg-green-600 flex items-center justify-center px-4 rounded-r-md">
+                  Subscribe
+                </button>
+              </div>
+
+              <!-- Social Media -->
+              <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+              <div class="flex space-x-4 mb-4">
+                <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom -->
+          <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+            <p>© 2023 Little Leafy. All rights reserved.</p>
+          </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const plantCards = document.querySelectorAll('.plant-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // Show/hide plants based on category
+                    plantCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

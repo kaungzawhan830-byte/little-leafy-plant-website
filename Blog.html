@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .logo-text svg {
+            width: 64px;
+            height: 64px;
+        }
+        .brand-logo {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .blog-card {
+            transition: transform 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .category-chip {
+            transition: all 0.3s ease;
+        }
+        .category-chip:hover {
+            background-color: #059669;
+            color: white;
+        }
+        /* Updated footer background color */
+        .footer-dark-blue {
+            background-color: #1a365d;
+        }
+
+        .footer-dark-blue {
+            background-color: #1f2937; /* Dark gray/blue */
+        }
+
+        .logo-container > svg {
+            width: 64px;
+            height: 64px;
+        }
+
+        .logo-text span {
+            font-size: 2rem; /* exactly 2rem */
+            font-weight: 600; /* same as Tailwind font-semibold */
+        }
+
+        /* Dropdown fixes */
+        .dropdown-group {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 240px;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            z-index: 50;
+        }
+        
+        .dropdown-group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f0fdf4;
+            color: #059669;
+        }
+        
+        /* Ensure the nav is above other content */
+        nav {
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="scroll-smooth bg-green-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+           <!-- Logo -->
+<div class="flex items-center space-x-4">
+  <div class="logo-text flex items-center space-x-2">
+    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+      <path d="M12 12V22"/>
+    </svg>
+    <span class="font-semibold text-green-700">Little Leafy</span>
+  </div>
+  <div class="flex space-x-1">
+    <img src="https://assets.digitalcontent.marksandspencer.app/image/upload/w_2560,q_auto,f_auto/SD_FD_F44A_29350063_NC_X_EC_0" alt="Small green succulent plant" class="w-10 h-10 rounded-full object-cover" />
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpuhIEchEK-dJcK__fDTwvCZzwIdNq51SyzA&s" alt="Monstera leaf" class="w-10 h-10 rounded-full object-cover" />
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFjrgKturj4MKMmaY7lQJBDT_0bT30nNhlQ&s" alt="Indoor plants" class="w-10 h-10 rounded-full object-cover" />
+  </div>
+</div>
+
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="Home.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🌱 Home</a>
+
+                <!-- Shop Dropdown -->
+                <div class="dropdown-group">
+                    <button type="button" class="flex items-center space-x-1 text-gray-700 font-medium hover:text-green-600 transition-colors">
+                        <span>🛒 Shop</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="Shop Indoor Plants.html" class="dropdown-item">🌱 Indoor Plants</a>
+                        <a href="OutDoor  Plants.html" class="dropdown-item">🌳 Outdoor Plants</a>
+                        <a href="Succulents & Cacti.html" class="dropdown-item">🌵 Succulents & Cacti</a>
+                        <a href="New Arrivals.html" class="dropdown-item">🌸 New Arrivals</a>
+                        <a href="Shop.html" class="dropdown-item">🪴 View all Plants</a>
+                    </div>
+                </div>
+
+                <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+                <a href="Login.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🔐 Login</a>
+                <a href="Help.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🆘 Help</a>
+
+                <!-- Contents Dropdown -->
+                <div class="dropdown-group">
+                    <button type="button" class="flex items-center space-x-1 text-gray-700 font-medium hover:text-green-600 transition-colors">
+                        <span>📂 Contents</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="All Plant Guide.html" class="dropdown-item">📖 Plant Care Tips & Guides</a>
+                        <a href="Blog.html" class="dropdown-item">📰 Blog</a>
+                        <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="dropdown-item">❓ Policies & FAQs</a>
+                        <a href="Visit Us.html" class="dropdown-item">🌎 Visit Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-16 px-6">
+        <div class="container mx-auto">
+            <!-- Blog Header -->
+            <section class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-green-800 mb-4">Little Leafy Blog</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Plant care tips, gardening guides, and inspiration for plant lovers of all levels</p>
+            </section>
+
+            <!-- Featured Post -->
+            <section class="mb-16">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:flex-1">
+                            <img src="https://images.squarespace-cdn.com/content/v1/5d01ccd13694d000015810dd/2cb89d6c-73ee-4550-a3f5-b18a9f44d705/wp7851936.jpg" 
+                                 alt="Indoor plant collection" class="w-full h-64 md:h-full object-cover">
+                        </div>
+                        <div class="md:flex-1 p-8 flex flex-col justify-center">
+                            <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mb-4">Indoor Plants</span>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-4">10 Best Indoor Plants for Beginners</h2>
+                            <p class="text-gray-600 mb-6">Starting your plant journey? These low-maintenance plants are perfect for beginners and will thrive even with minimal care.</p>
+                            <div class="flex items-center text-gray-500">
+                                <span class="mr-4"><i class="far fa-calendar mr-1"></i> June 15, 2023</span>
+                                <span><i class="far fa-clock mr-1"></i> 5 min read</span>
+                            </div>
+                            <a href="#" class="mt-6 inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">Read Article</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog Content -->
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Articles Section -->
+                <div class="md:w-2/3">
+                    <!-- Categories Filter -->
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <button class="category-chip bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium">All Topics</button>
+                        <button class="category-chip bg-white text-green-800 px-4 py-2 rounded-full text-sm font-medium border border-green-200">Indoor Plants</button>
+                        <button class="category-chip bg-white text-green-800 px-4 py-2 rounded-full text-sm font-medium border border-green-200">Outdoor Plants</button>
+                        <button class="category-chip bg-white text-green-800 px-4 py-2 rounded-full text-sm font-medium border border-green-200">Plant Care</button>
+                        <button class="category-chip bg-white text-green-800 px-4 py-2 rounded-full text-sm font-medium border border-green-200">Succulents</button>
+                    </div>
+
+                    <!-- Blog Posts Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Post 1 -->
+                        <article class="blog-card bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="https://www.saferbrand.com/media/Articles/Safer-Brand/How-to-Water-Plants.jpg" 
+                                 alt="Watering plants" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs mb-3">Plant Care</span>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">How to Water Your Plants Correctly</h3>
+                                <p class="text-gray-600 mb-4">Learn the signs of overwatering and underwatering, and establish a watering routine that keeps your plants healthy.</p>
+                                <div class="flex items-center justify-between text-sm text-gray-500">
+                                    <span>July 3, 2023</span>
+                                    <a href="#" class="text-green-600 font-medium flex items-center">Read More <i class="ml-1 fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 2 -->
+                        <article class="blog-card bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="https://lodhigarden.com/wp-content/uploads/2025/07/Step_06B-571bda9059324893ae6a6e6328a21138-1024x1001.jpg" 
+                                 alt="Succulent arrangement" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs mb-3">Succulents</span>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">Creating Beautiful Succulent Arrangements</h3>
+                                <p class="text-gray-600 mb-4">Step-by-step guide to designing stunning succulent displays for your home or as gifts for plant-loving friends.</p>
+                                <div class="flex items-center justify-between text-sm text-gray-500">
+                                    <span>June 28, 2023</span>
+                                    <a href="#" class="text-green-600 font-medium flex items-center">Read More <i class="ml-1 fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 3 -->
+                        <article class="blog-card bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="https://bluestem.ca/wp-content/uploads/2025/04/propagation-jar-on-windowsill.jpeg" 
+                                 alt="Plant propagation" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">Tips & Tricks</span>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">Plant Propagation: Multiply Your Collection for Free</h3>
+                                <p class="text-gray-600 mb-4">Learn various propagation techniques to create new plants from your existing favorites without spending money.</p>
+                                <div class="flex items-center justify-between text-sm text-gray-500">
+                                    <span>June 20, 2023</span>
+                                    <a href="#" class="text-green-600 font-medium flex items-center">Read More <i class="ml-1 fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 4 -->
+                        <article class="blog-card bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="https://cdn.mos.cms.futurecdn.net/CLFnvLY3aigKLiLqbH5xWA.jpg" 
+                                 alt="Outdoor garden" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs mb-3">Outdoor Plants</span>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">Creating a Low-Maintenance Outdoor Garden</h3>
+                                <p class="text-gray-600 mb-4">Discover the best plants and design strategies for a beautiful outdoor space that doesn't require constant attention.</p>
+                                <div class="flex items-center justify-between text-sm text-gray-500">
+                                    <span>June 12, 2023</span>
+                                    <a href="#" class="text-green-600 font-medium flex items-center">Read More <i class="ml-1 fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-12">
+                        <nav class="flex items-center space-x-2">
+                            <a href="#" class="px-3 py-2 rounded border text-green-600 border-green-200 hover:bg-green-50">Previous</a>
+                            <a href="#" class="px-3 py-2 rounded border text-white bg-green-600 border-green-600">1</a>
+                            <a href="#" class="px-3 py-2 rounded border text-green-600 border-green-200 hover:bg-green-50">2</a>
+                            <a href="#" class="px-3 py-2 rounded border text-green-600 border-green-200 hover:bg-green-50">3</a>
+                            <span class="px-2 py-2">...</span>
+                            <a href="#" class="px-3 py-2 rounded border text-green-600 border-green-200 hover:bg-green-50">Next</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="md:w-1/3">
+                    <!-- About Blog -->
+                    <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">About Our Blog</h3>
+                        <p class="text-gray-600 mb-4">Welcome to the Little Leafy blog, where we share plant care tips, styling ideas, and everything you need to create your own green oasis.</p>
+                        <a href="#" class="text-green-600 font-medium flex items-center">Learn More <i class="ml-1 fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Popular Posts -->
+                    <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Popular Posts</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mr-4">
+                                    <img src="https://unlimitedgreens.com/cdn/shop/articles/new-modern-steel-faucet-with-ceramic-sink-bathroom.jpg?crop=center&height=1024&v=1717405859&width=1024" 
+                                         alt="Plant in bathroom" class="w-16 h-16 object-cover rounded">
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Best Plants for Bathrooms</h4>
+                                    <span class="text-sm text-gray-500">May 28, 2023</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mr-4">
+                                    <img src="https://cdn.shopify.com/s/files/1/1289/2041/files/common-garden-pests-103_2048x2048.jpg?v=1706123946" 
+                                         alt="Plant pests" class="w-16 h-16 object-cover rounded">
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Dealing with Common Plant Pests</h4>
+                                    <span class="text-sm text-gray-500">May 15, 2023</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mr-4">
+                                    <img src="https://cdn.shopify.com/s/files/1/0569/9675/7697/files/what-is-plant-fertilizer-made-of_1024x1024.jpg?v=1655088556" 
+                                         alt="Plant fertilizer" class="w-16 h-16 object-cover rounded">
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Natural Fertilizers for Healthy Plants</h4>
+                                    <span class="text-sm text-gray-500">April 30, 2023</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Subscribe -->
+                    <div class="bg-green-700 p-6 rounded-xl shadow-md text-white">
+                        <h3 class="text-xl font-semibold mb-4">Subscribe to Our Newsletter</h3>
+                        <p class="mb-4">Get plant care tips, exclusive offers, and updates on new arrivals.</p>
+                        <form class="space-y-4">
+                            <input type="email" placeholder="Your email address" class="w-full px-4 py-2 rounded text-gray-900">
+                            <button type="submit" class="w-full bg-white text-green-700 font-medium py-2 px-4 rounded hover:bg-green-100 transition">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-dark-blue text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <h3 class="brand-title flex items-center font-bold text-xl mb-4">
+                        <svg class="w-12 h-12 text-green-400 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                            <path d="M12 12V22"/>
+                        </svg>
+                        Little Leafy
+                    </h3>
+                    <p class="text-gray-300">
+                        Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Home.html" class="text-gray-300 hover:text-white transition">Home</a></li>
+                        <li><a href="Shop.html" class="text-gray-300 hover:text-white transition">Shop</a></li>
+                        <li><a href="About.html" class="text-gray-300 hover:text-white transition">About us</a></li>
+                        <li><a href="Help.html" class="text-gray-300 hover:text-white transition">Help</a></li>
+                        <li><a href="Login.html" class="text-gray-300 hover:text-white transition">Login</a></li>
+                        <li><a href="Visit Us.html" class="text-gray-300 hover:text-white transition">Visit Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service & Categories -->
+                <div>
+                    <h4 class="font-bold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="All Plant Guide.html" class="text-gray-300 hover:text-white transition">Plant Care Guides</a></li>
+                        <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-300 hover:text-white transition">Our Policies & FAQs</a></li>
+                        <li><a href="Blog.html" class="text-gray-300 hover:text-white transition">Blog</a></li>
+                    </ul>
+
+                    <h4 class="font-bold mb-4 mt-6">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Shop Indoor Plants.html" class="text-gray-300 hover:text-white transition">Indoor Plants</a></li>
+                        <li><a href="OutDoor  Plants.html" class="text-gray-300 hover:text-white transition">Outdoor Plants</a></li>
+                        <li><a href="Succulents & Cacti.html" class="text-gray-300 hover:text-white transition">Succulents & Cacti</a></li>
+                        <li><a href="New Arrivals.html" class="text-gray-300 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="Shop.html" class="text-gray-300 hover:text-white transition">View All Plants</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300 mb-4">
+                        <p>45 Thiri Mingalar Street</p>
+                        <p>Bahan Township, Yangon 11201</p>
+                        <p>Phone: (095) 123-4567</p>
+                        <p>Email: kaungzawhan830@gmail.com</p>
+                    </div>
+
+                    <!-- Newsletter Section -->
+                    <h4 class="font-bold mb-2">Subscribe Our Page....</h4>
+                    <div class="flex mb-6">
+                        <input 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            class="px-3 py-2 w-full text-gray-900 rounded-l-md focus:outline-none"
+                        >
+                        <button class="bg-green-700 hover:bg-green-600 flex items-center justify-center px-4 rounded-r-md">
+                            Subscribe
+                        </button>
+                    </div>
+
+                    <!-- Social Media -->
+                    <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                       <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-300">
+                <p>© 2023 Little Leafy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for category filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryChips = document.querySelectorAll('.category-chip');
+            
+            categoryChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    // Remove active class from all chips
+                    categoryChips.forEach(c => {
+                        c.classList.remove('bg-green-600', 'text-white');
+                        c.classList.add('bg-white', 'text-green-800', 'border', 'border-green-200');
+                    });
+                    
+                    // Add active class to clicked chip
+                    this.classList.remove('bg-white', 'text-green-800', 'border', 'border-green-200');
+                    this.classList.add('bg-green-600', 'text-white');
+                    
+                    // In a real implementation, you would filter blog posts here
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Leafy.com</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .floating { animation: float 4s ease-in-out infinite; }
+    .floating-2 { animation: float 5s ease-in-out infinite 1s; }
+    .floating-3 { animation: float 6s ease-in-out infinite 1.5s; }
+
+    @keyframes slide-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-83.33%); } /* 6 slides */
+    }
+    .animate-slide-left {
+      animation: slide-left 40s linear infinite;
+    }
+
+    .search-dropdown {
+      display: none;
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+    .search-input:focus + .search-dropdown, .search-dropdown:hover {
+      display: block;
+    }
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Custom CSS */
+    /* Slider Animation */
+     /* Slider Animation for 6 Images (go 1→6 then 6→1) */
+@keyframes slide-pingpong {
+  0%   { transform: translateX(0); }          /* Show 1 */
+  10%  { transform: translateX(-16.6666%); }  /* Show 2 */
+  20%  { transform: translateX(-33.3333%); }  /* Show 3 */
+  30%  { transform: translateX(-50%); }       /* Show 4 */
+  40%  { transform: translateX(-66.6666%); }  /* Show 5 */
+  50%  { transform: translateX(-83.3333%); }  /* Show 6 */
+  60%  { transform: translateX(-66.6666%); }  /* Back to 5 */
+  70%  { transform: translateX(-50%); }       /* Back to 4 */
+  80%  { transform: translateX(-33.3333%); }  /* Back to 3 */
+  90%  { transform: translateX(-16.6666%); }  /* Back to 2 */
+  100% { transform: translateX(0); }          /* Back to 1 */
+}
+
+.slider-track {
+  display: flex;
+  width: 600%; /* since you have 6 images */
+  animation: slide-pingpong 60s linear infinite;
+  will-change: transform;
+}
+
+
+.slider-track {
+        animation: slide 60s linear infinite;
+        will-change: transform;
+    }
+    
+    @keyframes slide {
+        0%, 15% { transform: translateX(0); }
+        20%, 35% { transform: translateX(-16.6666%); }
+        40%, 55% { transform: translateX(-33.3333%); }
+        60%, 75% { transform: translateX(-50%); }
+        80%, 95% { transform: translateX(-66.6666%); }
+        100% { transform: translateX(-83.3333%); }
+    }
+    
+    /* Search Dropdown */
+    .search-input:focus + .search-dropdown,
+    .search-dropdown:hover {
+        display: block !important;
+    }
+    
+    /* Mobile Menu Animation */
+    .mobile-menu {
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
+    }
+    
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+    
+    @keyframes slide-left-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-50%); } /* move left */
+      100% { transform: translateX(0); }   /* move back right */
+    }
+
+    .slider-track {
+      animation: slide-left-right 40s linear infinite;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button */
+.dropdown > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  color: #374151; /* gray-700 */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown > button:hover {
+  color: #2e7d32; /* green-700 */
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin-top: 6px;
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown links */
+.dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #374151; /* gray-700 */
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #2e7d32; /* green-700 */
+}
+
+/* Active link (Outdoor Plants highlighted) */
+.dropdown-menu a.active {
+  color: #2e7d32; /* green */
+  font-weight: 600;
+
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center; /* vertically centers text and SVG */
+    gap: 0.5rem;         /* space between logo and text */
+}
+
+.logo-container > svg {
+    width: 64px;
+    height: 64px;
+}
+
+.logo-container > .logo-text {
+    font-size: 2rem;
+    line-height: 1; /* remove extra vertical spacing */
+}
+
+
+/* Footer Brand Styling */
+.footer-brand .brand-logo {
+  width: 48px;        /* Logo width */
+  height: 48px;       /* Logo height */
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  fill: #22c55e;      /* Green color for logo (#22c55e = Tailwind green-500) */
+}
+
+.footer-brand .brand-title {
+  display: flex;
+  align-items: center; /* Vertical align text with logo */
+  font-size: 1.25rem;  /* Tailwind text-xl equivalent */
+  font-weight: 700;
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+
+
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm py-4 px-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <!-- Logo -->
+      <div class="logo-container">
+    <svg class="text-green-600" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+        <path d="M12 12V22"/>
+    </svg>
+    <span class="logo-text text-green-700 font-bold">Little Leafy</span>
+</div>
+
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-8 items-center">
+        <a href="Home.html" class="text-gray-600 hover:text-green-700 font-medium">🏡 Home</a>
+
+<!-- Dropdown Menu -->
+<div class="relative group">
+ <a href="Shop.html" class="flex items-center space-x-1 text-gray-600 hover:text-green-700 font-medium px-3 py-2 transition-colors">
+    <span>🛒 Shop</span>
+    <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+  
+  <!-- Dropdown -->
+  <div class="absolute left-0 mt-1 w-52 bg-white rounded-lg shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100 pointer-events-none group-hover:pointer-events-auto">
+    <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌳 Indoor Plants</a>
+    <a href="OutDoor  Plants.html" class="block px-4 py-2 text-green-700 font-medium hover:bg-green-50 transition-colors">🌲 Outdoor Plants</a>
+    <a href="Succulents & Cacti.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌵 Succulents & Cacti</a>
+     <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+    <a href="Shop.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">👀 View All Plants</a>
+  </div>
+</div>
+
+
+ <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+  <a href="login.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🔐 Login</a>
+          <a href="Help.html" class="text-gray-700 hover:text-green-600 font-medium px-3 py-2">🆘Help</a>
+
+
+
+        <!-- Dropdown Menu -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 text-gray-600 hover:text-green-700 font-medium px-3 py-2 transition-colors">
+            <span>📂 Contents</span>
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          
+          <!-- Dropdown -->
+          <div class="absolute left-0 mt-1 w-48 bg-white rounded-lg shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-gray-100 pointer-events-none group-hover:pointer-events-auto">
+            <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">📖 Plant Care Guides</a>
+            <a href="blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">📰 Blog</a>
+            <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">❓ Our Policies & FAQs</a>
+            <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+          </div>
+        </div>
+
+        <!-- Search & Cart -->
+        <div class="flex items-center space-x-4">
+          <div class="relative search-container">
+            <input type="text" placeholder="Search outdoor plants..." class="search-input px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500">
+            <div class="search-dropdown bg-white border border-gray-200 rounded-lg mt-1 shadow-lg hidden">
+              <div class="p-2 hover:bg-gray-100 cursor-pointer">🌿 Boxwood Shrubs</div>
+              <div class="p-2 hover:bg-gray-100 cursor-pointer">💜 English Lavender</div>
+              <div class="p-2 hover:bg-gray-100 cursor-pointer">🌸 Hydrangea</div>
+              <div class="p-2 hover:bg-gray-100 cursor-pointer">🍁 Japanese Maple</div>
+              <div class="p-2 hover:bg-gray-100 cursor-pointer">🌹 Rose Bush</div>
+            </div>
+          </div>
+          <a href="Plant detail.html" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full transition">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section with Slider -->
+  <section class="relative overflow-hidden" style="height: 80vh; min-height: 560px; max-height: 900px;">
+    <div class="absolute inset-0 w-full h-full overflow-hidden">
+      <div class="slider-track flex w-[200%] h-full animate-slide-left">
+        <img src="https://plantsbymail.com/cdn/shop/files/PlantsbyMail-social-media-share-image.png?crop=center&height=1200&v=1704394148&width=1200" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="">
+        <img src="https://planetdesert.com/cdn/shop/articles/A-rock-garden-jpj_1_372d57c9-ffc9-4566-a6d2-4edb9108705c.jpg?v=1738054553" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="">
+        <img src="https://www.gertens.com/media/wysiwyg/top4-evergreens.jpg" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="">
+        <img src="https://s3-media0.fl.yelpcdn.com/bphoto/s5At8TCj1JZGEvzgUvBOyA/1000s.jpg" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="">
+        <img src="https://images.squarespace-cdn.com/content/v1/5c2a4527b27e39387712f543/1610246572729-E5Z1HFBEZD3AZ6DDM0MP/IMG_1288.JPG" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="">
+        <img src="https://preview.redd.it/my-little-urban-jungle-brings-so-me-so-much-joy-v0-8a2ut1075nfa1.jpg?width=1080&crop=smart&auto=webp&s=ff589dc4db1b259a897dc686ff55add77146106a" 
+             class="w-1/3 h-full object-cover flex-shrink-0" alt="">
+      </div>
+      <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        Transform Your Outdoor Space
+      </h1>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl">
+        Discover our premium selection of outdoor plants to create your dream garden.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#shop-outdoor-plants" 
+           class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg text-center">
+          🌿 Shop Outdoor Plants
+        </a>
+        <a href="All Plant Guide.html" class="bg-white hover:bg-gray-50 text-green-700 px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg">
+          📘 Care Guides
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outdoor Plants Section -->
+  <section id="shop-outdoor-plants" class="container mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold text-center text-green-800 mb-12">Outdoor Plants Collection</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      
+<!-- Product 1 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-10%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="OutDoor  Plants.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/556929e4-adb0-4bc1-a131-dfe0959b683c.png" alt="Boxwood shrubs" class="floating-2 object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Boxwood Shrubs</h4>
+      <p class="text-gray-600 text-sm mb-2">Classic Garden Evergreens</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$39.99</span></div>
+      <div class="font-bold text-green-700 mb-2">$35.99</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 2 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b87c2f98-7fdc-4d6f-b9aa-160905e975d2.png" alt="English Lavender" class="floating-3 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">English Lavender</h4>
+    <p class="text-gray-600 text-sm mb-2">Fragrant and Beautiful</p>
+    <div class="font-bold text-green-700 mb-2">$22.50</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 3 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-12%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="OutDoor  Plants.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f9df7105-604d-4fc2-b7dc-0f5c49e9cdcb.png" alt="Hydrangea" class="floating object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Hydrangea</h4>
+      <p class="text-gray-600 text-sm mb-2">Colorful Blooms</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$34.99</span></div>
+      <div class="font-bold text-green-700 mb-2">$30.79</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 4 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/df2f97d9-1d78-4428-a83c-a9fb7fa1f1ea.png" alt="Japanese Maple" class="floating-2 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Japanese Maple</h4>
+    <p class="text-gray-600 text-sm mb-2">Elegant Foliage</p>
+    <div class="font-bold text-green-700 mb-2">$49.99</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 5 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-18%</div>
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e4a03c35-2a97-4fad-b80d-c03cb317b4ed.png" alt="Rose Bush" class="floating-3 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Rose Bush</h4>
+    <p class="text-gray-600 text-sm mb-2">Classic Garden Beauty</p>
+    <div class="mb-1"><span class="text-gray-400 line-through">$29.95</span></div>
+    <div class="font-bold text-green-700 mb-2">$24.56</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 6 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e30d367-0ebc-4633-ae3a-9819d4972637.png" alt="Hosta" class="floating object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Hosta</h4>
+    <p class="text-gray-600 text-sm mb-2">Shade-Loving Perennial</p>
+    <div class="font-bold text-green-700 mb-2">$26.50</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 7 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-7%</div>
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/68d6d4af-1b10-4dcd-94e4-67bff6c89d7e.png" alt="Ornamental Grass" class="floating-2 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Ornamental Grass</h4>
+    <p class="text-gray-600 text-sm mb-2">Dramatic Movement</p>
+    <div class="mb-1"><span class="text-gray-400 line-through">$31.75</span></div>
+    <div class="font-bold text-green-700 mb-2">$29.50</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 8 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1ffd490a-e2fb-4452-9d06-e83691984a87.png" alt="Yucca" class="floating-3 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Yucca</h4>
+    <p class="text-gray-600 text-sm mb-2">Drought Tolerant</p>
+    <div class="font-bold text-green-700 mb-2">$37.50</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 9 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="p-4 flex justify-center h-64">
+    <a href="OutDoor  Plants.html">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0412c270-f993-4719-90a4-68ee91ea9c88.png" alt="Agave" class="floating-3 object-contain h-full">
+    </a>
+  </div>
+  <div class="p-4 text-center">
+    <h4 class="font-bold text-lg mb-1">Agave</h4>
+    <p class="text-gray-600 text-sm mb-2">Desert Beauty</p>
+    <div class="font-bold text-green-700 mb-2">$32.99</div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+<!-- Product 10 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition relative flex flex-col justify-between">
+  <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-20%</div>
+  <div>
+    <div class="p-4 flex justify-center h-64">
+      <a href="OutDoor  Plants.html">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/549510af-910d-4878-9d57-5f3be48802eb.png" alt="Blue Chalk Sticks" class="floating object-contain h-full">
+      </a>
+    </div>
+    <div class="p-4 text-center">
+      <h4 class="font-bold text-lg mb-1">Blue Chalk Sticks</h4>
+      <p class="text-gray-600 text-sm mb-2">Unique Color</p>
+      <div class="mb-1"><span class="text-gray-400 line-through">$23.44</span></div>
+      <div class="font-bold text-green-700 mb-2">$18.75</div>
+    </div>
+  </div>
+  <a href="Plant detail.html">
+    <button class="w-full bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200">Add to Cart</button>
+  </a>
+</div>
+
+    </div>
+  </section>
+
+   <!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="footer-brand">
+        <h3 class="brand-title">
+          <svg class="brand-logo" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+            <path d="M12 12V22"/>
+          </svg>
+          Little Leafy
+        </h3>
+        <p class="text-gray-400">
+          Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+        </p>
+      </div>
+
+
+      <div>
+        <h4 class="font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+         <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+          <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+          <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+          <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+          <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+          <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold mb-4">Customer Service</h4>
+        <ul class="space-y-2">
+          <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+          <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-white transition">Our Policies & FAQs</a></li>
+          <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+        </ul>
+
+
+        <h4 class="font-bold mb-4">Categories</h4>
+        <ul class="space-y-2">
+           <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+          <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+          <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+          <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+              <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+        <div class="space-y-2 text-gray-400">
+          <p>45 Thiri Mingalar Street</p>
+          <p>Bahan Township, Yangon 11201</p>
+          <p>Phone: (095) 123-4567</p>
+          <p>Email: kaungzawhan830@gmail.com</p>
+        </div>
+
+         <!-- Newsletter Section -->
+        <div class="mt-6">
+          <h4 class="font-medium mb-2">Subscribe Our Page....</h4>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="px-3 py-2 text-gray-800 rounded-l-lg w-full focus:outline-none">
+            <button class="bg-green-800 hover:bg-green-700 px-4 py-2 rounded-r-lg">
+              <i class="">Subscribe</i>
+            </button>
+          </div>
+        </div>
+        
+
+        <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+        <div class="flex space-x-4 mb-4">
+          <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+      <p>© 2023 Little Leafy. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

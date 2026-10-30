@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #388E3C;
+            --light-green: #C8E6C9;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --dark-gray: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--gray);
+            color: #333;
+            line-height: 1.6;
+            padding-top: 80px; /* Account for fixed navbar */
+        }
+        
+        .login-container {
+            display: flex;
+            min-height: calc(100vh - 80px - 448px); /* Account for nav and footer */
+        }
+        
+        .left-section {
+            flex: 1;
+            background-image: url('https://cdn11.bigcommerce.com/s-oqm1pc/images/stencil/original/image-manager/new-arrivals-reupload.jpg?t=1750888320');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: none;
+        }
+        
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(76, 175, 80, 0.3);
+        }
+        
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-green);
+            font-size: 2.5rem; /* bigger font size */
+            font-weight: 700;  /* bold for emphasis */
+        }
+
+        .logo p {
+            color: var(--dark-gray);
+            font-size: 1.1rem; /* slightly bigger subtitle */
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 0.5rem;
+        }
+        
+        .forgot-password a {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--dark-green);
+        }
+        
+        .divider {
+            margin: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .divider::before {
+            left: 0;
+        }
+        
+        .divider::after {
+            right: 0;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            background-color: var(--gray);
+        }
+        
+        .register-link {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .register-link a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        @media (min-width: 768px) {
+            .left-section {
+                display: block;
+            }
+        }
+
+        /* Footer Brand Logo */
+        .footer h3 svg {
+            width: 64px;   /* logo width */
+            height: 64px;  /* logo height */
+            color: #22c55e; /* green color */
+            margin-right: 0.5rem; /* space between logo and text */
+        }
+
+        /* Footer Brand Title */
+        .footer h3 {
+            display: flex;
+            align-items: center; /* vertically center text with logo */
+            font-size: 1.5rem;   /* adjust text size */
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Hidden Sign In Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+        }
+
+        .modal-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mobile responsiveness for modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            
+           <!-- Logo -->
+            <div class="flex items-center space-x-4">
+                <div class="logo-text flex items-center space-x-2">
+                    <svg class="w-12 h-12 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                        <path d="M12 12V22"/>
+                    </svg>
+                    <span class="font-bold text-2xl text-green-700">Little Leafy</span>
+                </div>
+                <div class="flex space-x-1">
+                    <img src="https://assets.digitalcontent.marksandspencer.app/image/upload/w_2560,q_auto,f_auto/SD_FD_F44A_29350063_NC_X_EC_0" alt="Small green succulent plant" class="w-12 h-12 rounded-full object-cover" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpuhIEchEK-dJcK__fDTwvCZzwIdNq51SyzA&s" alt="Monstera leaf" class="w-12 h-12 rounded-full object-cover" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFjrgKturj4MKMmaY7lQJBDT_0bT30nNhlQ&s" alt="Indoor plants" class="w-12 h-12 rounded-full object-cover" />
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="Home.html" class="hover:text-green-600 transition-colors">🌱 Home</a>
+
+                <!-- Shop Dropdown -->
+                <div class="relative group">
+                    <a href="#Shop" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+                        <span>🛒 Shop</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+                        <a href="OutDoor  Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+                        <a href="Succulents & Cacti.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌵 Succulents & Cacti</a>
+                        <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+                        <a href="Shop.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱🪴View all Plants</a>
+                    </div>
+                </div>
+
+                <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+                <a href="Login.html"  class="text-gray-700 font-medium hover:text-green-600 transition-colors">🔐 Login</a>
+                <a href="Help.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🆘 Help</a>
+
+                <!-- Contents Dropdown -->
+                <div class="relative group">
+                    <a href="#" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+                        <span>📂 Contents</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📖 Plant Care Guides</a>
+                        <a href="Blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📰 Blog</a>
+                        <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">❓ Our Policies & FAQs</a>
+                        <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login/Account Button -->
+            <div class="flex items-center space-x-4">
+                <a href="#" id="signUpBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hidden Sign In Modal -->
+    <div class="modal-overlay" id="signInModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-logo">
+                <div class="flex items-center justify-center space-x-2">
+                    <svg class="w-12 h-12 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                        <path d="M12 12V22"/>
+                    </svg>
+                    <div>
+                        <h1>Little Leafy</h1>
+                        <p>Bring nature into your home</p>
+                    </div>
+                </div>
+            </div>
+            
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="modal-email">Email Address</label>
+                    <input type="email" id="modal-email" name="email" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="modal-password">Password</label>
+                    <input type="password" id="modal-password" name="password" placeholder="••••••••" required>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="modal-remember" name="remember">
+                        <label for="modal-remember">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="/forgot-password">Forgot password?</a>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            
+            <div class="divider">
+                or continue with
+            </div>
+            
+            <div class="social-login">
+                <div class="social-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Google icon SVG -->
+                        <path d="M19.8056 10.2303C19.8056 9.55056 19.7491 8.86711 19.6278 8.19836H10.1992V12.0492H15.6008C15.3773 13.2911 14.657 14.3898 13.6001 15.0879V17.5866H16.8008C18.7906 15.8449 19.8056 13.2728 19.8056 10.2303Z" fill="#4285F4"/>
+                        <path d="M10.1992 20.0006C12.897 20.0006 15.1714 19.1151 16.8008 17.5865L13.6001 15.0879C12.7089 15.6979 11.5521 16.0433 10.1992 16.0433C7.59473 16.0433 5.38272 14.2832 4.58904 11.9169H1.26367V14.4927C2.90421 17.8695 6.35404 20.0006 10.1992 20.0006Z" fill="#34A853"/>
+                        <path d="M4.58904 11.9169C4.30939 11.1069 4.18241 10.2361 4.18241 9.34561C4.18241 8.45511 4.30939 7.58431 4.58904 6.77431V4.19849H1.26366C0.376654 5.99363 -0.061639 8.0598 0.0097618 10.126C0.0097618 12.1922 0.376654 14.2584 1.26366 16.0535L4.58904 13.4777V11.9169Z" fill="#FBBC05"/>
+                        <path d="M10.1992 3.95805C11.6259 3.936 13.0035 4.47247 14.036 5.45722L16.8766 2.62218C15.1854 1.0374 12.7328 0.0534908 10.1992 0.0836088C6.35404 0.0836088 2.90421 2.21475 1.26367 5.59157L4.58904 8.16739C5.38272 5.80107 7.59473 4.04097 10.1992 4.04097V3.95805Z" fill="#EA4335"/>
+                    </svg>
+                </div>
+                <div class="social-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Facebook icon SVG -->
+                        <path d="M18.3333 10.0003C18.3333 5.39783 14.6025 1.66699 10 1.66699C5.39746 1.66699 1.66663 5.39783 1.66663 10.0003C1.66663 14.0262 4.64079 17.3578 8.54163 18.0003V12.3753H6.41663V10.0003H8.54163V8.08366C8.54163 5.91116 9.89579 4.68783 11.8854 4.68783C12.8281 4.68783 13.8125 4.85449 13.8125 4.85449V6.91699H12.7396C11.6812 6.91699 11.4583 7.56283 11.4583 8.22949V10.0003H13.7188L13.3646 12.3753H11.4583V18.0003C15.3591 17.3578 18.3333 14.0262 18.3333 10.0003Z" fill="#1877F2"/>
+                    </svg>
+                </div>
+                <div class="social-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Apple icon SVG -->
+                        <path d="M15.3274 10.6253C15.3409 9.28366 16.0487 8.08366 17.1409 7.40866C16.3574 6.40866 15.2574 5.83366 14.0659 5.80033C12.9159 5.66699 11.7659 6.42533 11.1659 6.42533C10.5409 6.42533 9.58238 5.83366 8.66588 5.83366C6.79088 5.85866 4.74871 7.29199 4.74871 9.99199C4.74871 10.7837 4.88238 11.592 5.14088 12.417C5.66588 14.0837 7.41588 16.4753 9.38238 16.3753C10.2659 16.342 10.8659 15.7587 11.9909 15.7587C13.0824 15.7587 13.6324 16.3753 14.6159 16.3753C16.5824 16.3503 18.1659 14.2253 18.6659 12.5503C16.2574 11.4253 15.3274 10.6253 15.3274 10.6253ZM13.0574 4.25033C13.9909 3.16699 13.9909 1.91699 13.9409 1.66699C12.8659 1.70033 11.6159 2.42533 10.9159 3.30033C10.0824 4.29199 9.64088 5.45033 9.71588 6.66699C10.8409 6.75033 11.8409 6.10033 12.5409 5.30033C13.0659 4.70033 13.4324 4.50033 13.0574 4.25033Z" fill="#000000"/>
+                    </svg>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <!-- Main content (unchanged) -->
+    <div class="login-container">
+        <div class="left-section">
+            <!-- Background image will be shown on larger screens -->
+        </div>
+        
+        <div class="right-section">
+            <div class="login-form">
+                <div class="logo">
+                    <div class="flex items-center justify-center space-x-2">
+                        <svg class="w-12 h-12 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                            <path d="M12 12V22"/>
+                        </svg>
+                        <div>
+                            <h1>Little Leafy</h1>
+                            <p>Bring nature into your home</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form action="/login" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="/forgot-password">Forgot password?</a>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                
+                <div class="divider">
+                    or continue with
+                </div>
+                
+                <div class="social-login">
+    <!-- Google Login -->
+    <a href="https://accounts.google.com/o/oauth2/v2/auth" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Google icon SVG -->
+            <path d="M19.8056 10.2303C19.8056 9.55056 19.7491 8.86711 19.6278 8.19836H10.1992V12.0492H15.6008C15.3773 13.2911 14.657 14.3898 13.6001 15.0879V17.5866H16.8008C18.7906 15.8449 19.8056 13.2728 19.8056 10.2303Z" fill="#4285F4"/>
+            <path d="M10.1992 20.0006C12.897 20.0006 15.1714 19.1151 16.8008 17.5865L13.6001 15.0879C12.7089 15.6979 11.5521 16.0433 10.1992 16.0433C7.59473 16.0433 5.38272 14.2832 4.58904 11.9169H1.26367V14.4927C2.90421 17.8695 6.35404 20.0006 10.1992 20.0006Z" fill="#34A853"/>
+            <path d="M4.58904 11.9169C4.30939 11.1069 4.18241 10.2361 4.18241 9.34561C4.18241 8.45511 4.30939 7.58431 4.58904 6.77431V4.19849H1.26366C0.376654 5.99363 -0.061639 8.0598 0.0097618 10.126C0.0097618 12.1922 0.376654 14.2584 1.26366 16.0535L4.58904 13.4777V11.9169Z" fill="#FBBC05"/>
+            <path d="M10.1992 3.95805C11.6259 3.936 13.0035 4.47247 14.036 5.45722L16.8766 2.62218C15.1854 1.0374 12.7328 0.0534908 10.1992 0.0836088C6.35404 0.0836088 2.90421 2.21475 1.26367 5.59157L4.58904 8.16739C5.38272 5.80107 7.59473 4.04097 10.1992 4.04097V3.95805Z" fill="#EA4335"/>
+        </svg>
+    </a>
+
+    <!-- Facebook Login -->
+    <a href="https://www.facebook.com/v12.0/dialog/oauth" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Facebook icon SVG -->
+            <path d="M18.3333 10.0003C18.3333 5.39783 14.6025 1.66699 10 1.66699C5.39746 1.66699 1.66663 5.39783 1.66663 10.0003C1.66663 14.0262 4.64079 17.3578 8.54163 18.0003V12.3753H6.41663V10.0003H8.54163V8.08366C8.54163 5.91116 9.89579 4.68783 11.8854 4.68783C12.8281 4.68783 13.8125 4.85449 13.8125 4.85449V6.91699H12.7396C11.6812 6.91699 11.4583 7.56283 11.4583 8.22949V10.0003H13.7188L13.3646 12.3753H11.4583V18.0003C15.3591 17.3578 18.3333 14.0262 18.3333 10.0003Z" fill="#1877F2"/>
+        </svg>
+    </a>
+
+    <!-- Apple Login -->
+    <a href="https://appleid.apple.com/auth/authorize" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Apple icon SVG -->
+            <path d="M15.3274 10.6253C15.3409 9.28366 16.0487 8.08366 17.1409 7.40866C16.3574 6.40866 15.2574 5.83366 14.0659 5.80033C12.9159 5.66699 11.7659 6.42533 11.1659 6.42533C10.5409 6.42533 9.58238 5.83366 8.66588 5.83366C6.79088 5.85866 4.74871 7.29199 4.74871 9.99199C4.74871 10.7837 4.88238 11.592 5.14088 12.417C5.66588 14.0837 7.41588 16.4753 9.38238 16.3753C10.2659 16.342 10.8659 15.7587 11.9909 15.7587C13.0824 15.7587 13.6324 16.3753 14.6159 16.3753C16.5824 16.3503 18.1659 14.2253 18.6659 12.5503C16.2574 11.4253 15.3274 10.6253 15.3274 10.6253ZM13.0574 4.25033C13.9909 3.16699 13.9909 1.91699 13.9409 1.66699C12.8659 1.70033 11.6159 2.42533 10.9159 3.30033C10.0824 4.29199 9.64088 5.45033 9.71588 6.66699C10.8409 6.75033 11.8409 6.10033 12.5409 5.30033C13.0659 4.70033 13.4324 4.50033 13.0574 4.25033Z" fill="#000000"/>
+        </svg>
+    </a>
+</div>
+
+                <div class="register-link">
+                    Don't have an account? Please Sign Up
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Brand Info -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 flex items-center">
+          <svg class="w-10 h-10 text-green-400 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+            <path d="M12 12V22"/>
+          </svg>
+          Little Leafy
+        </h3>
+        <p class="text-gray-400">Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+          <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+          <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+          <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+          <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+          <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Service -->
+      <div>
+        <h4 class="font-bold mb-4">Customer Service</h4>
+        <ul class="space-y-2">
+          <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+          <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-green-600 transition">Our Policies & FAQs</a></li>
+          <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+
+        </ul>
+
+        <h4 class="font-bold mb-4">Categories</h4>
+        <ul class="space-y-2">
+          <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+          <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-green-600 transition">Outdoor Plants</a></li>
+          <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+           <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+            <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+
+
+
+
+      </div>
+
+      <!-- Contact & Newsletter -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+        <div class="space-y-2 text-gray-400">
+          <p>45 Thiri Mingalar Street</p>
+          <p>Bahan Township, Yangon 11201</p>
+          <p>Phone: (095) 123-4567</p>
+          <p>Email: kaungzawhan830@gmail.com</p>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="mt-6">
+          <h4 class="font-medium mb-2">Subscribe Our Page....</h4>
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="px-3 py-2 text-gray-800 rounded-l-lg w-full focus:outline-none">
+            <button class="bg-green-800 hover:bg-green-700 px-4 py-2 rounded-r-lg">
+              <i class="">subscribe </i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Social Icons -->
+        <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+        <div class="flex space-x-4 mb-4">
+          <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+     
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+      <p>© 2023 Little Leafy. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+        // Modal functionality
+        const signInBtn = document.getElementById('signInBtn');
+        const signUpBtn = document.getElementById('signUpBtn');
+        const modal = document.getElementById('signInModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // Open modal when clicking Sign In
+        signInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+
+        // Open modal when clicking Sign Up
+        signUpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+
+        // Close modal when clicking X
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }
+        });
+
+        // Simple FAQ toggle functionality (unchanged)
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('div:last-child');
+                const icon = item.querySelector('svg');
+                
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                } else {
+                    answer.classList.add('hidden');
+                    icon.classList.remove('rotate-180');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 80px;
+            background-color: #f9fafb;
+        }
+        .cart-item {
+            transition: all 0.3s ease;
+        }
+        .cart-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d1d5db;
+            background: white;
+            cursor: pointer;
+        }
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border-top: 1px solid #d1d5db;
+            border-bottom: 1px solid #d1d5db;
+            border-left: none;
+            border-right: none;
+        }
+
+        .logo-container > .logo-text {
+    font-size: 2rem;
+    line-height: 1; /* remove extra vertical spacing */
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <!-- Fixed Top Navbar -->
+        <header class="fixed top-0 left-0 w-full bg-white shadow z-50">
+            <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+                
+             
+<!-- Logo -->
+<div class="flex items-center space-x-4">
+  <div class="logo-text flex items-center space-x-2">
+    <svg class="w-16 h-16 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+      <path d="M12 12V22"/>
+    </svg>
+    <span class="text-3xl font-bold text-green-700">Little Leafy</span>
+  </div>
+
+
+
+
+                    <div class="flex space-x-1">
+                        <img src="https://assets.digitalcontent.marksandspencer.app/image/upload/w_2560,q_auto,f_auto/SD_FD_F44A_29350063_NC_X_EC_0" alt="Small green succulent plant" class="w-10 h-10 rounded-full object-cover" />
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpuhIEchEK-dJcK__fDTwvCZzwIdNq51SyzA&s" alt="Monstera leaf" class="w-10 h-10 rounded-full object-cover" />
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFjrgKturj4MKMmaY7lQJBDT_0bT30nNhlQ&s" alt="Indoor plants" class="w-10 h-10 rounded-full object-cover" />
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="Home.html" class=" hover:text-green-600 transition-colors">🌱 Home</a>
+
+                    <!-- Shop Dropdown -->
+                    <div class="relative group">
+                        <a href="Shop.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+                            <span>🛒 Shop</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            <a href="Shop Indoor Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+                            <a href="OutDoor  Plants.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+                            <a href="Succulents & Cacti.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌵 Succulents and Cactis</a>
+                            <a href="New Arrivals.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌸 New Arrival</a>
+                            <a href="Shop.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">🌱🪴View all Plants</a>
+                        </div>
+                    </div>
+
+                    <a href="About.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">📖 About</a>
+                    <a href="Login.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors"> 🔐 Login</a>
+                    <a href="Help.html" class="text-gray-700 font-medium hover:text-green-600 transition-colors">🆘 Help</a>
+
+                    <!-- Contents Dropdown -->
+                    <div class="relative group">
+                        <a href="#" class="text-gray-700 font-medium hover:text-green-600 transition-colors flex items-center space-x-1">
+                            <span>📂 Contents</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            <a href="All Plant Guide.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📖 Plant Care  Guides</a>
+                            <a href="Blog.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">📰 Blog</a>
+                            <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">❓ Our Policies & FAQs</a>
+                            <a href="Visit Us.html" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">🌎Visit Us</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Icon -->
+                    <a href="#" class="relative text-gray-700 hover:text-green-600">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-green-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </nav>
+
+    <!-- Cart Page Content -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+            <i class="fas fa-shopping-cart mr-3 text-green-600"></i> Your Shopping Cart
+        </h1>
+        
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Cart Items -->
+            <div class="lg:w-2/3">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <!-- Cart Header -->
+                    <div class="hidden md:grid grid-cols-12 bg-green-50 px-6 py-3 text-green-800 font-medium">
+                        <div class="col-span-5">Product</div>
+                        <div class="col-span-2 text-center">Price</div>
+                        <div class="col-span-2 text-center">Quantity</div>
+                        <div class="col-span-2 text-center">Subtotal</div>
+                        <div class="col-span-1"></div>
+                    </div>
+                    
+                    <!-- Cart Item 1 -->
+                    <div class="cart-item grid grid-cols-12 gap-4 p-6 border-b">
+                        <div class="col-span-12 md:col-span-5 flex items-center">
+                            <img src="https://cdn.shopify.com/s/files/1/0550/5207/5167/files/Talking-of-plants-echeveria-lilacina-mexican-snow-ball_1024x1024.jpg?v=1616166386" 
+                                 alt="Succulent Plant" class="w-20 h-20 object-cover rounded-lg">
+                            <div class="ml-4">
+                                <h3 class="font-medium text-gray-800">Echeveria Succulent</h3>
+                                <p class="text-sm text-gray-500">Small • Ceramic Pot</p>
+                            </div>
+                        </div>
+                        <div class="col-span-4 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <span class="text-green-700 font-medium">$12.99</span>
+                        </div>
+                        <div class="col-span-4 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <div class="flex items-center">
+                                <button class="quantity-btn rounded-l-md">-</button>
+                                <input type="text" class="quantity-input" value="1">
+                                <button class="quantity-btn rounded-r-md">+</button>
+                            </div>
+                        </div>
+                        <div class="col-span-3 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <span class="text-green-700 font-medium">$12.99</span>
+                        </div>
+                        <div class="col-span-1 flex items-center justify-end">
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Item 2 -->
+                    <div class="cart-item grid grid-cols-12 gap-4 p-6 border-b">
+                        <div class="col-span-12 md:col-span-5 flex items-center">
+                            <img src="https://www.thesill.com/cdn/shop/files/the-sill_Medium-Monstera-Deliciosa_Medium_Isabella_Stone_Variant_b68d0a34-b068-4105-a15c-7d1b22ba6b29.jpg?v=1756237169&width=1946" 
+                                 alt="Monstera Plant" class="w-20 h-20 object-cover rounded-lg">
+                            <div class="ml-4">
+                                <h3 class="font-medium text-gray-800">Monstera Deliciosa</h3>
+                                <p class="text-sm text-gray-500">Medium • Terracotta Pot</p>
+                            </div>
+                        </div>
+                        <div class="col-span-4 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <span class="text-green-700 font-medium">$24.99</span>
+                        </div>
+                        <div class="col-span-4 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <div class="flex items-center">
+                                <button class="quantity-btn rounded-l-md">-</button>
+                                <input type="text" class="quantity-input" value="1">
+                                <button class="quantity-btn rounded-r-md">+</button>
+                            </div>
+                        </div>
+                        <div class="col-span-3 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <span class="text-green-700 font-medium">$24.99</span>
+                        </div>
+                        <div class="col-span-1 flex items-center justify-end">
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Item 3 -->
+                    <div class="cart-item grid grid-cols-12 gap-4 p-6">
+                        <div class="col-span-12 md:col-span-5 flex items-center">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvXoq2cIxUxHf5aq7SGQTt6YcKAxyBdFNABA&s" 
+                                 alt="Cactus Plant" class="w-20 h-20 object-cover rounded-lg">
+                            <div class="ml-4">
+                                <h3 class="font-medium text-gray-800">Golden Barrel Cactus</h3>
+                                <p class="text-sm text-gray-500">Small • Decorative Pot</p>
+                            </div>
+                        </div>
+                        <div class="col-span-4 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <span class="text-green-700 font-medium">$9.99</span>
+                        </div>
+                        <div class="col-span-4 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <div class="flex items-center">
+                                <button class="quantity-btn rounded-l-md">-</button>
+                                <input type="text" class="quantity-input" value="2">
+                                <button class="quantity-btn rounded-r-md">+</button>
+                            </div>
+                        </div>
+                        <div class="col-span-3 md:col-span-2 flex items-center justify-start md:justify-center">
+                            <span class="text-green-700 font-medium">$19.98</span>
+                        </div>
+                        <div class="col-span-1 flex items-center justify-end">
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Continue Shopping & Update Cart -->
+                <div class="flex flex-col sm:flex-row justify-between mt-6">
+                    <a href="Shop.html" class="flex items-center text-green-600 hover:text-green-700 mb-4 sm:mb-0">
+                        <i class="fas fa-arrow-left mr-2"></i> Continue Shopping
+                    </a>
+                    <button class="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition">
+                        Update Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Cart Summary -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Cart Summary</h2>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="font-medium">$57.96</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="font-medium">$5.99</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Tax</span>
+                            <span class="font-medium">$4.06</span>
+                        </div>
+                        <div class="border-t pt-3 mt-3">
+                            <div class="flex justify-between text-lg font-bold">
+                                <span>Total</span>
+                                <span class="text-green-700">$68.01</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2">Promo Code</label>
+                        <div class="flex">
+                            <input type="text" placeholder="Enter code" class="flex-grow px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <button class="px-4 py-2 bg-green-600 text-white rounded-r-md hover:bg-green-700">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition font-medium">
+                        Proceed to Checkout
+                    </button>
+                    
+                    <div class="mt-6 text-sm text-gray-500">
+                        <p class="flex items-center mb-2">
+                            <i class="fas fa-truck mr-2 text-green-600"></i> Free shipping on orders over $50
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-green-600"></i> Secure checkout
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Recently Viewed -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <h3 class="font-bold text-gray-800 mb-4">Recently Viewed</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGVhY2UlMjBsaWx5JTIwcGxhbnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" 
+                                 alt="Peace Lily" class="w-16 h-16 object-cover rounded-lg">
+                            <div class="ml-4">
+                                <h4 class="text-sm font-medium text-gray-800">Peace Lily</h4>
+                                <p class="text-green-600 font-medium">$18.99</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1599638155882-321edf19c917?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHNuYWtlJTIwcGxhbnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" 
+                                 alt="Snake Plant" class="w-16 h-16 object-cover rounded-lg">
+                            <div class="ml-4">
+                                <h4 class="text-sm font-medium text-gray-800">Snake Plant</h4>
+                                <p class="text-green-600 font-medium">$14.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#1f2937] text-white py-12 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <h3 class="brand-title flex items-center text-xl font-bold mb-2">
+                        <svg class="brand-logo w-12 h-12 mr-2 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                            <path d="M12 12V22"/>
+                        </svg>
+                        Little Leafy
+                    </h3>
+                    <p class="text-gray-400">
+                        Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+                        <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+                        <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+                        <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+                        <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="font-bold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+                        <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-white transition">Our Policies & FAQs</a></li>
+                        <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+
+                    <h4 class="font-bold mb-4 mt-6">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+                        <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+                        <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+                        <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-400 mb-4">
+                        <p>45 Thiri Mingalar Street</p>
+                        <p>Bahan Township, Yangon 11201</p>
+                        <p>Phone: (095) 123-4567</p>
+                        <p>Email: kaungzawhan830@gmail.com</p>
+                    </div>
+
+                    <!-- Newsletter Section -->
+                    <h4 class="font-bold mb-2">Subscribe Our Page....</h4>
+                    <div class="flex mb-6">
+                        <input 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            class="px-3 py-2 w-full text-gray-900 rounded-l-md focus:outline-none"
+                        >
+                        <button class="bg-green-700 hover:bg-green-600 flex items-center justify-center px-4 rounded-r-md">
+                            <i class="">Subscribe</i>
+                        </button>
+                    </div>
+
+                    <!-- Social Media -->
+                    <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                         <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                <p>© 2023 Little Leafy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple quantity adjustment functionality
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.quantity-input');
+                let value = parseInt(input.value);
+                
+                if (this.textContent === '+') {
+                    value++;
+                } else if (this.textContent === '-' && value > 1) {
+                    value--;
+                }
+                
+                input.value = value;
+            });
+        });
+    </script>
+
+
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const trashButtons = document.querySelectorAll('.cart-item button i');
+
+    trashButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const cartItem = btn.closest('.cart-item');
+            if (cartItem) {
+                cartItem.classList.remove('active'); // remove active
+                cartItem.remove(); // optional: remove the item from DOM
+            }
+        });
+    });
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Leafy.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .category-btn.active {
+            background-color: #16a34a;
+            color: white;
+        }
+        .tool-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
+<style id="phone-fix">
+@media (max-width:767px){
+  html,body{overflow-x:hidden}
+  .container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}
+  .container input[placeholder^="Search"]{width:6.5rem!important;padding-left:.75rem!important;padding-right:.75rem!important}
+  .container .text-2xl.font-semibold{font-size:1.15rem!important;white-space:nowrap}
+  .container svg.w-12{width:2rem!important;height:2rem!important}
+  header .container,header nav>div{max-width:100%}
+  .search-input,#searchInput{width:7rem!important;padding-left:.75rem!important;padding-right:.75rem!important}
+  .logo-text{font-size:1.15rem!important;white-space:nowrap}
+  .logo-container>svg,.logo-icon{width:32px!important;height:32px!important}
+  header .space-x-3>*+*{margin-left:.4rem!important}
+}
+</style>
+</head>
+<body class="bg-green-50 pt-16">
+    <!-- Navigation (from provided code) -->
+    <nav class="bg-white shadow fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+            
+            <!-- Left: Logo -->
+            <div class="flex items-center space-x-2">
+                <svg class="w-12 h-12 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                    <path d="M12 12V22"/>
+                </svg>
+                <span class="text-2xl font-semibold text-green-700">Little Leafy</span>
+            </div>
+
+            <!-- Center: Links -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="Home.html" class=" hover:bg-green-50 hover:text-green-600">🌱 Home</a>
+                
+               <!-- Shop Dropdown -->
+<div class="relative group">
+    <!-- Shop link (acts as both dropdown trigger + direct link) -->
+    <a href="Shop.html" class="flex items-center text-gray-700 hover:text-green-600 font-medium space-x-1">
+        <span>🛒 Shop</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </a>
+
+    <!-- Dropdown menu -->
+    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 
+                opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                transition-all duration-200">
+        <a href="Shop Indoor Plants.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌱 Indoor Plants</a>
+        <a href="OutDoor  Plants.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌳 Outdoor Plants</a>
+        <a href="Succulents & Cacti.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌵 Succulents & Cacti</a>
+        <a href="New Arrivals.html" class="block px-4 py-2  hover:bg-green-50">🌸 New Arrival</a>
+        <a href="Shop.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🪴 View All Plants</a>
+    </div>
+</div>
+
+
+                <a href="About.html" class="text-gray-700 hover:text-green-600 font-medium">📖 About</a>
+                <a href="Login.html" class="text-gray-700 hover:text-green-600 font-medium">🔐 Login</a>
+                <a href="Help.html" class="text-gray-700 hover:text-green-600 font-medium">🆘 Help</a>
+
+                <!-- Contents Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center text-gray-700 hover:text-green-600 font-medium space-x-1">
+                        <span>📂 Contents</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="All Plant Guide.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">📖 Plant Care Guides</a>
+                        <a href="Blog.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">📰 Blog</a>
+                        <a href="Shipping Policy,Return Policy,Blog,FAQ.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">❓ Policies & FAQs</a>
+                         <a href="Visit Us.html" class="block px-4 py-2 hover:bg-green-50 hover:text-green-600">🌎 Visit Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Search & Cart -->
+            <div class="flex items-center space-x-3">
+                <input type="text" placeholder="Search plants..." class="px-4 py-2 border border-gray-300 rounded-full w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <a href="#" class="flex items-center bg-green-600 text-white px-3 py-2 rounded-full hover:bg-green-700 transition-colors">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="ml-2 hidden md:inline">Cart</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 hover:text-green-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-green-800 mb-4">Plant Tools & Accessories</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Discover our premium selection of plant care tools and accessories to help your plants thrive. 
+                Each product is carefully selected for quality and effectiveness.
+            </p>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <button class="category-btn active px-6 py-2 rounded-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition" data-category="all">
+                All Tools
+            </button>
+            <button class="category-btn px-6 py-2 rounded-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition" data-category="indoor">
+                Indoor Plants
+            </button>
+            <button class="category-btn px-6 py-2 rounded-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition" data-category="outdoor">
+                Outdoor Plants
+            </button>
+            <button class="category-btn px-6 py-2 rounded-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition" data-category="succulent">
+                Succulents & Cacti
+            </button>
+        </div>
+
+       <!-- Tools Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    <!-- Tool 1 -->
+    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden" data-categories="indoor outdoor">
+        <div class="h-48 overflow-hidden">
+            <img src="https://m.media-amazon.com/images/I/51+IQaTtvVL._UF1000,1000_QL80_.jpg" 
+                 alt="Premium Hand Trowel" class="product-image">
+        </div>
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-green-800">Premium Hand Trowel</h3>
+                <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">$12.99</span>
+            </div>
+            <p class="text-gray-600 mb-4">
+                Perfect for potting and transplanting small to medium plants. Durable stainless steel head with comfortable grip.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h4 class="font-bold text-green-700 mb-2">Usage Notes:</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-700">
+                    <li>Ideal for indoor repotting and outdoor garden beds</li>
+                    <li>Clean after each use to prevent rust</li>
+                    <li>Not recommended for rocky or very hard soil</li>
+                </ul>
+            </div>
+            <a href="Login.html" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition flex items-center justify-center">
+                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+            </a>
+        </div>
+    </div>
+
+    <!-- Tool 2 -->
+    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden" data-categories="indoor">
+        <div class="h-48 overflow-hidden">
+            <img src="https://i5.walmartimages.com/asr/53931c33-2462-4e88-90a6-44c192f737b1.dda492ce2664b29249ffc0366a939efd.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" 
+                 alt="Precision Watering Can" class="product-image">
+        </div>
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-green-800">Precision Watering Can</h3>
+                <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">$18.99</span>
+            </div>
+            <p class="text-gray-600 mb-4">
+                1-liter capacity with long spout for targeted watering. Perfect for houseplants and small containers.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h4 class="font-bold text-green-700 mb-2">Usage Notes:</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-700">
+                    <li>Excellent for reaching plants in crowded arrangements</li>
+                    <li>Rose attachment provides gentle shower for seedlings</li>
+                    <li>Store empty to prevent mineral buildup</li>
+                </ul>
+            </div>
+            <a href="Login.html" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition flex items-center justify-center">
+                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+            </a>
+        </div>
+    </div>
+
+    <!-- Tool 3 -->
+    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden" data-categories="succulent">
+        <div class="h-48 overflow-hidden">
+            <img src="https://m.media-amazon.com/images/I/61VHGCu653L.jpg" 
+                 alt="Succulent Watering Syringe" class="product-image">
+        </div>
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-green-800">Succulent Watering Syringe</h3>
+                <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">$8.99</span>
+            </div>
+            <p class="text-gray-600 mb-4">
+                50ml precision syringe for targeted watering at the base of succulents and cacti, avoiding moisture on leaves.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h4 class="font-bold text-green-700 mb-2">Usage Notes:</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-700">
+                    <li>Prevents overwatering of sensitive succulents</li>
+                    <li>Perfect for tightly arranged succulent gardens</li>
+                    <li>Can be used for applying liquid fertilizers precisely</li>
+                </ul>
+            </div>
+            <a href="Login.html" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition flex items-center justify-center">
+                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+            </a>
+        </div>
+    </div>
+
+    <!-- Tool 4 -->
+    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden" data-categories="outdoor">
+        <div class="h-48 overflow-hidden">
+            <img src="https://m.media-amazon.com/images/I/71aWS+j4T6L.jpg" 
+                 alt="Professional Pruning Shears" class="product-image">
+        </div>
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-green-800">Professional Pruning Shears</h3>
+                <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">$24.99</span>
+            </div>
+            <p class="text-gray-600 mb-4">
+                Bypass pruners with sharp stainless steel blades. Perfect for trimming branches up to ¾ inch thick.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h4 class="font-bold text-green-700 mb-2">Usage Notes:</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-700">
+                    <li>Ideal for shaping shrubs and small trees</li>
+                    <li>Clean blades after each use to prevent disease spread</li>
+                    <li>Sharpening regularly maintains cutting efficiency</li>
+                </ul>
+            </div>
+            <a href="Login.html" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition flex items-center justify-center">
+                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+            </a>
+        </div>
+    </div>
+
+    <!-- Tool 5 -->
+    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden" data-categories="indoor outdoor">
+        <div class="h-48 overflow-hidden">
+            <img src="https://www.diggers.com.au/cdn/shop/products/2lt-Pressure-Sprayer-HSPRAY-01_2048x.jpg?v=1673415981" 
+                 alt="Pressure Sprayer" class="product-image">
+        </div>
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-green-800">Pressure Sprayer</h3>
+                <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">$22.99</span>
+            </div>
+            <p class="text-gray-600 mb-4">
+                1-gallon pressurized sprayer for misting, applying treatments, or watering hard-to-reach plants.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h4 class="font-bold text-green-700 mb-2">Usage Notes:</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-700">
+                    <li>Excellent for applying neem oil or insecticidal soap</li>
+                    <li>Adjustable nozzle for stream or mist settings</li>
+                    <li>Rinse thoroughly after using any treatments</li>
+                </ul>
+            </div>
+            <a href="Login.html" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition flex items-center justify-center">
+                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+            </a>
+        </div>
+    </div>
+
+    <!-- Tool 6 -->
+    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden" data-categories="succulent indoor">
+        <div class="h-48 overflow-hidden">
+            <img src="https://botanicyork.co.uk/cdn/shop/files/PlantCareTips.webp?v=1718103901&width=1500" 
+                 alt="Plant Care Kit" class="product-image">
+        </div>
+        <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-green-800">Plant Care Kit</h3>
+                <span class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">$19.99</span>
+            </div>
+            <p class="text-gray-600 mb-4">
+                5-piece set including mini rake, spade, fork, scraper, and brush. Perfect for small pots and terrariums.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h4 class="font-bold text-green-700 mb-2">Usage Notes:</h4>
+                <ul class="list-disc pl-5 text-sm text-gray-700">
+                    <li>Ideal for small indoor plants and succulents</li>
+                    <li>Brush helps remove dust from plant leaves</li>
+                    <li>Scraper useful for loosening compacted soil</li>
+                </ul>
+            </div>
+            <a href="Login.html" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition flex items-center justify-center">
+                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+            </a>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+
+        <!-- Usage Guide Section -->
+        <div class="bg-white rounded-lg shadow-md p-8 mb-16">
+            <h2 class="text-3xl font-bold text-green-800 mb-6 text-center">Plant Tool Usage Guide</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">General Care Tips</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Clean tools after each use to prevent disease transmission</li>
+                        <li>Store in a dry place to prevent rust</li>
+                        <li>Regularly sharpen cutting tools for best performance</li>
+                        <li>Use the right tool for the specific task to avoid damage</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Plant-Specific Recommendations</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li><span class="font-semibold">Indoor Plants:</span> Precision tools for limited space</li>
+                        <li><span class="font-semibold">Outdoor Plants:</span> Durable, weather-resistant tools</li>
+                        <li><span class="font-semibold">Succulents & Cacti:</span> Specialized tools for delicate handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (from provided code) -->
+    <footer class="bg-[#1f2937] text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <h3 class="flex items-center space-x-2 font-bold text-xl mb-4">
+                        <svg class="w-12 h-12 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L12.65 8.5L17.5 7.5L13.5 11.5L18 15L12 12L6 15L10.5 11.5L6.5 7.5L11.35 8.5L12 2Z"/>
+                            <path d="M12 12V22"/>
+                        </svg>
+                        <span>Little Leafy</span>
+                    </h3>
+                    <p class="text-gray-400">
+                        Bringing nature indoors and beautifying outdoor spaces with premium plants since 2018.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Home.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">Shop</a></li>
+                        <li><a href="About.html" class="text-gray-400 hover:text-white transition">About us</a></li>
+                        <li><a href="Help.html" class="text-gray-400 hover:text-white transition">Help</a></li>
+                        <li><a href="Login.html" class="text-gray-400 hover:text-white transition">Login</a></li>
+                        <li><a href="Visit Us.html" class="text-gray-400 hover:text-white transition">Visit Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="font-bold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="All Plant Guide.html" class="text-gray-400 hover:text-white transition">Plant Care Guides</a></li>
+                        <li><a href="Shipping Policy,Return Policy,Blog,FAQ.html#faqs" class="text-gray-400 hover:text-white transition">Our Policies & FAQs</a></li>
+                        <li><a href="Blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+                    <h4 class="font-bold mb-4 mt-6">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Shop Indoor Plants.html" class="text-gray-400 hover:text-white transition">Indoor Plants</a></li>
+                        <li><a href="OutDoor  Plants.html" class="text-gray-400 hover:text-white transition">OutDoor Plants</a></li>
+                        <li><a href="Succulents & Cacti.html" class="text-gray-400 hover:text-white transition">Succulents & Cacti</a></li>
+                       <li><a href="New Arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>                        
+                       <li><a href="Shop.html" class="text-gray-400 hover:text-white transition">View All Plants</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-400 mb-4">
+                        <p>45 Thiri Mingalar Street</p>
+                        <p>Bahan Township, Yangon 11201</p>
+                        <p>Phone: (095) 123-4567</p>
+                        <p>Email: kaungzawhan830@gmail.com</p>
+                    </div>
+
+                    <!-- Newsletter Section -->
+                    <h4 class="font-bold mb-2">Subscribe Our Page....</h4>
+                    <div class="flex mb-6">
+                        <input 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            class="px-3 py-2 w-full text-gray-900 rounded-l-md focus:outline-none"
+                        >
+                        <button class="bg-green-700 hover:bg-green-600 flex items-center justify-center px-4 rounded-r-md">
+                            Subscribe
+                        </button>
+                    </div>
+
+                    <!-- Social Media -->
+                    <h4 class="font-bold mb-4 mt-6">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-facebook-f text-white"></i>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-instagram text-white"></i>
+</a>
+
+<a href="https://www.pinterest.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-600 transition">
+  <i class="fab fa-pinterest-p text-white"></i>
+</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                <p>© 2023 Little Leafy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active', 'bg-green-600', 'text-white'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active', 'bg-green-600', 'text-white');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // Show/hide tools based on category
+                    toolCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-categories').includes(category)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
